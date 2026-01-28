@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, AnimatePresence } from 'framer-motion'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Points, PointMaterial, OrbitControls, Html } from '@react-three/drei'
-import * as THREE from 'three'
 
 // --- Utilities ---
 
@@ -27,20 +24,7 @@ const Magnetic = ({ children, strength = 0.3 }: { children: React.ReactNode, str
   )
 }
 
-const generatePoints = (count: number) => {
-  const p = new Float32Array(count * 3)
-  for (let i = 0; i < count; i++) {
-    const r = 2
-    const theta = 2 * Math.PI * Math.random()
-    const phi = Math.acos(2 * Math.random() - 1)
-    p[i * 3] = r * Math.sin(phi) * Math.cos(theta)
-    p[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta)
-    p[i * 3 + 2] = r * Math.cos(phi)
-  }
-  return p
-}
 
-const GLOBAL_POINTS = generatePoints(12000)
 
 // --- Highly Custom Components ---
 
@@ -94,17 +78,17 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
         >
           <div className="mega-menu-content">
             {/* Left: Editorial/Art */}
-            <div className="hidden lg:flex relative bg-black items-center justify-center overflow-hidden">
+            <div className="hidden lg:flex relative bg-gradient-to-br from-[#F7F8FA] via-white to-[#FEFEFE] items-center justify-center overflow-hidden">
                <motion.img 
                  initial={{ scale: 1.2, opacity: 0 }}
-                 animate={{ scale: 1, opacity: 0.4 }}
+                 animate={{ scale: 1, opacity: 0.08 }}
                  src="/data_sphere.png" 
                  alt="Art" 
-                 className="absolute inset-0 w-full h-full object-cover grayscale" 
+                 className="absolute inset-0 w-full h-full object-cover" 
                />
                <div className="relative z-10 p-24 text-center">
-                  <h3 className="text-3xl font-serif italic mb-6">“您现在最担心什么？”</h3>
-                  <p className="text-white/40 text-sm tracking-widest max-w-sm mx-auto uppercase">
+                  <h3 className="text-3xl font-serif italic mb-6 text-black/80">"您现在最担心什么？"</h3>
+                  <p className="text-black/40 text-sm tracking-widest max-w-sm mx-auto uppercase">
                      我们的架构师正在实时分析全球风险节点，为您构建专属的避风港。
                   </p>
                </div>
@@ -178,9 +162,11 @@ const Header = () => {
             
             <div className="pointer-events-auto flex items-center gap-12">
                {/* Round 1: Global Support Service Node */}
-               <div className="hidden lg:flex items-center gap-3 px-5 py-2.5 bg-black/[0.03] rounded-full border border-black/5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                  <span className="text-[9px] text-black font-mono tracking-[0.2em] uppercase">GSN_NODE // 95511_ACTIVE</span>
+               <div className="hidden lg:flex items-center gap-3 px-5 py-2.5 bg-white/60 backdrop-blur-sm rounded-full border border-black/5 shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
+                    <span className="text-[9px] text-blue-800 tracking-[0.2em] font-mono uppercase">Node_Active</span>
+                  </div>
                </div>
                
                <div className="flex items-center gap-3">
@@ -250,7 +236,6 @@ const Header = () => {
 }
 
 const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveStage: (s: string) => void }) => {
-  const [placeholder, setPlaceholder] = useState("您最想守护的是？")
   const [isSoundOn, setIsSoundOn] = useState(false)
 
 
@@ -264,73 +249,111 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
           alt="" 
           className="w-full h-full object-cover opacity-80" 
         />
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-rain-drops-on-a-window-pane-1418-large.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(212,175,55,0.08),transparent_50%)] z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(212,175,55,0.05),transparent_60%)] z-10" />
       </div>
 
-      <div className="relative z-20 max-w-5xl">
+      <div className="relative z-20 w-[90%] max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center gap-10 mb-20 opacity-60">
-            <div className="w-24 h-[1px] bg-gold" />
-            <span className="text-xs tracking-[1em] uppercase font-bold">Standard of Protection</span>
-          </div>
-          
-          <h1 className="hero-headline mb-12">
-            于不确定中，<br />
-            <span className="italic text-black/40 font-extralight tracking-tight">建构生命的厚度。</span>
-          </h1>
-          
-          <p className="hero-subline mb-24 max-w-2xl leading-relaxed text-black/70 text-lg font-light">
-             {activeStage === 'Founders' && "保护财富与梦想。在全球波动中，为您的事业提供稳健的底层保障。"}
-             {activeStage === 'Guardians' && "全家人的护盾。将爱转化为实实在在的保障，守护每个幸福瞬间。"}
-             {activeStage === 'Explorers' && "探索世界的安全冗余。在未知的旅途中，为您提供 24 小时贴身响应。"}
-          </p>
-          
-          <div className="max-w-2xl flex flex-col gap-12">
-            {/* Round 2: Life-Stage Navigator */}
-             <div className="flex gap-10 border-b border-black/5 pb-6">
-                {['Founders', 'Guardians', 'Explorers'].map(stage => (
-                  <div 
-                    key={stage}
-                    className={`text-[12px] uppercase tracking-[0.5em] pb-3 cursor-pointer transition-all font-bold ${activeStage === stage ? 'text-black border-b-2 border-black' : 'text-black/50 hover:text-black/80'}`}
-                    onClick={() => setActiveStage(stage)}
-                  >
-                     {stage}
-                  </div>
-                ))}
-             </div>
-
-            <div className="flex items-center gap-8 group relative">
-              {/* Round 3: Commitment Stamp */}
-              <div className="commitment-stamp">
-                 <span className="scale-75 uppercase text-center block leading-tight">Pro<br/>Value</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full h-[80vh]">
+            {/* Left Column: Headline & Brand Identity */}
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-center h-full relative z-10">
+              <div className="flex items-center gap-8 mb-12 opacity-60">
+                <div className="w-16 h-[1px] bg-gradient-to-r from-gold to-transparent" />
+                <span className="text-[10px] tracking-[0.8em] uppercase font-bold text-black/60">Standard of Protection</span>
               </div>
               
-              <div className="relative flex-1">
-                <Magnetic strength={0.05}>
-                  <input 
-                    type="text" 
-                    placeholder={placeholder}
-                    className="w-full bg-transparent border-none outline-none text-2xl font-light py-8 search-input placeholder:text-black/60 text-black"
-                  />
-                  <div className="search-line bg-black" />
-                </Magnetic>
-              </div>
-              <Magnetic strength={0.2}>
-                 <button className="cta-vermilion">立即调取方案</button>
-              </Magnetic>
+              <h1 className="hero-headline mb-16">
+                于不确定中，<br />
+                <span className="italic text-black/30 font-extralight tracking-tight">建构生命的厚度。</span>
+              </h1>
+
+              {/* Agent Card: Redesigned to be less obtrusive and more integrated */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.5, duration: 1.5 }}
+                className="glass-card rounded-xl p-6 max-w-[320px] cursor:pointer hover:bg-white/90 transition-all duration-500 border-l-2 border-l-gold/20"
+              >
+                 <div className="flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-full p-[2px] border border-black/5 flex-shrink-0">
+                       <img src="/agent_profile.png" className="w-full h-full rounded-full object-cover grayscale opacity-80" />
+                    </div>
+                    <div>
+                       <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[9px] text-green-600 tracking-widest uppercase font-bold bg-green-50 px-2 py-0.5 rounded-full">Active</span>
+                          <span className="text-[9px] text-black/30 font-mono">ID: 8829_AX</span>
+                       </div>
+                       <h3 className="text-lg font-serif text-black mb-0.5">陈先生</h3>
+                       <p className="text-[9px] text-black/40 tracking-[0.2em] uppercase">Senior Risk Officer</p>
+                    </div>
+                 </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column: Interaction Console - Expanded & Fused */}
+            <div className="col-span-12 lg:col-span-7 h-full flex items-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 1.2 }}
+                className="w-full bg-white/40 backdrop-blur-xl p-12 pr-16 rounded-[2rem] border border-white/60 shadow-[0_40px_100px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.04)] transition-all duration-700 relative overflow-hidden group"
+              >
+                 {/* Subtle background gradient for fusion */}
+                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-white/80 to-transparent pointer-events-none opacity-50" />
+                 
+                 <div className="relative z-10 flex flex-col gap-12">
+                   {/* Life-Stage Navigator */}
+                   <div className="flex gap-16 border-b border-black/5 pb-10">
+                      {[
+                        { id: 'Founders', label: '创业者', sub: 'Business' }, 
+                        { id: 'Guardians', label: '守护者', sub: 'Family' }, 
+                        { id: 'Explorers', label: '探索者', sub: 'Life' }
+                      ].map(item => (
+                        <div 
+                          key={item.id}
+                          className={`group cursor-pointer transition-all duration-500 flex flex-col items-start gap-3 ${activeStage === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                          onClick={() => setActiveStage(item.id)}
+                        >
+                           <span className={`text-3xl font-serif font-extralight ${activeStage === item.id ? 'text-black' : 'text-black'}`}>{item.label}</span>
+                           <span className="text-[10px] tracking-[0.3em] uppercase font-mono text-black/40 relative pl-1">
+                              {item.sub}
+                              {activeStage === item.id && <motion.div layoutId="underline" className="absolute -bottom-10 left-0 w-full h-[2px] bg-gradient-to-r from-gold to-transparent" />}
+                           </span>
+                        </div>
+                      ))}
+                   </div>
+
+                   <div className="min-h-[5rem] flex items-center">
+                      <p key={activeStage} className="text-black/60 text-lg font-light leading-relaxed animate-fade-in max-w-lg">
+                        {[
+                          activeStage === 'Founders' && "保护财富与梦想。为您的事业提供稳健的底层保障。",
+                          activeStage === 'Guardians' && "全家人的护盾。将爱转化为保障，守护每个幸福瞬间。",
+                          activeStage === 'Explorers' && "探索世界的安全冗余。提供 24 小时贴身响应。"
+                        ].filter(Boolean)}
+                      </p>
+                   </div>
+
+                   <div className="flex items-center gap-0 group/input relative mt-2 bg-white rounded-2xl p-2 shadow-sm border border-black/5 transition-all hover:shadow-md hover:border-black/10">
+                      <div className="flex-1 px-6 py-4 flex items-center gap-4">
+                         <span className="text-black/10 text-xl font-light">/</span>
+                         <input 
+                           type="text" 
+                           placeholder="唤醒 AI 风险规划师..."
+                           className="w-full bg-transparent border-none outline-none text-xl font-light placeholder:text-black/20 text-black"
+                         />
+                      </div>
+                      
+                      <button className="flex items-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 whitespace-nowrap group/btn hover:-translate-y-0.5">
+                         <span className="text-sm tracking-[0.2em] font-medium">启动</span>
+                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
+                      </button>
+                   </div>
+                 </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>
@@ -359,87 +382,16 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
       {/* Scroll Hint */}
       <div className="scroll-hint-line" />
 
-      {/* Agent Card: Relocated for better balance */}
-      <motion.div 
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 2, duration: 1.5 }}
-        className="absolute bottom-16 right-16 z-30 flex items-center gap-6 glass-card rounded-2xl border-gold/10 group cursor-default"
-      >
-        <div className="relative">
-          <div className="w-14 h-14 rounded-full overflow-hidden border border-gold/20 p-1">
-            <img src="/agent_profile.png" alt="Consultant" className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
-          </div>
-          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black animate-pulse" />
-        </div>
-        <div className="flex flex-col pr-4">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[8px] text-gold tracking-widest uppercase font-bold">Secure Node</span>
-            <div className="w-1 h-1 bg-gold/50 rounded-full" />
-            <span className="text-[8px] text-black/20">AGENT_02</span>
-          </div>
-          <span className="text-md font-serif text-black">高级风险官 · 陈先生</span>
-        </div>
-      </motion.div>
+
     </section>
   )
 }
 
-function ParticleSphere({ mode = 'default' }: { mode?: string }) {
-  const ref = useRef<THREE.Points>(null!)
-  const { scrollYProgress } = useScroll()
-  const [converged, setConverged] = useState(0)
-  
-  // Scrollytelling convergence logic
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      // Converge between scroll 0.2 and 0.4
-      const progress = Math.min(Math.max((latest - 0.2) * 5, 0), 1)
-      setConverged(progress)
-    })
-    return () => unsubscribe()
-  }, [scrollYProgress])
+// 3D Components removed for static design
 
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    const rotationSpeed = mode === 'speed' ? 0.4 : 0.05
-    ref.current.rotation.y = t * rotationSpeed
-    ref.current.rotation.x = t * (rotationSpeed/2)
-    
-    // Convergence math: blend between random dispersed and sphere
-    const positions = ref.current.geometry.attributes.position.array as Float32Array
-    for (let i = 0; i < GLOBAL_POINTS.length; i++) {
-       const spherePos = GLOBAL_POINTS[i]
-       const dispersedPos = (i % 3 === 0 ? Math.sin(i) : Math.cos(i)) * 5
-       positions[i] = THREE.MathUtils.lerp(dispersedPos, spherePos, converged)
-    }
-    ref.current.geometry.attributes.position.needsUpdate = true
-  })
-
-  const getColor = () => {
-    if (mode === 'capital') return '#D4AF37' // Gold (inverted from deep blue)
-    if (mode === 'speed') return '#404040' // Darker Silver (inverted from light silver)
-    if (mode === 'risk') return '#1A3A5F' // Deep Blue (inverted from gold)
-    return '#D4AF37' // Default gold
-  }
-
-  return (
-    <Points ref={ref} positions={GLOBAL_POINTS.slice()} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color={getColor()}
-        size={mode === 'risk' ? 0.008 : 0.005}
-        sizeAttenuation={true}
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-        opacity={converged * 0.6}
-      />
-    </Points>
-  )
-}
 
 const Pulse = () => {
-  const [activeMode, setActiveMode] = useState('default')
+    // activeMode removed
   
   return (
     <section id="pulse" className="pulse-section min-h-screen">
@@ -472,62 +424,70 @@ const Pulse = () => {
                  ].map((stat, i) => (
                    <motion.div 
                      key={i}
-                     onMouseEnter={() => setActiveMode(stat.id)}
-                     onMouseLeave={() => setActiveMode('default')}
                      className="flex flex-col group cursor-pointer border-l-2 border-transparent hover:border-gold pl-8 transition-all duration-700"
                    >
                       <div className="flex items-center gap-3">
                          <span className="pulse-label opacity-60">PROTOCOL_0{i+1} // {stat.label}</span>
-                         {(stat as any).jade && <span className="jade-accent">● LIVE_GROWTH</span>}
+                         {stat.jade && <span className="jade-accent">● LIVE_GROWTH</span>}
                       </div>
                       <div className="flex items-baseline mt-4 mb-2">
                          <span className="pulse-number font-din text-black">{stat.val}</span>
                          <span className="pulse-unit font-din text-black">{stat.unit}</span>
-                      </div>
+                       </div>
                       <p className="pulse-desc text-black/60 text-lg font-light leading-relaxed">{stat.desc}</p>
                    </motion.div>
                  ))}
               </div>
 
-              {/* Right: The Data Installation */}
-              <div className="col-span-12 lg:col-span-7 h-[1000px] relative mt-20 lg:mt-0">
-                <Canvas camera={{ position: [0, 0, 5], fov: 35 }}>
-                  <color attach="background" args={['#F7F8FA']} />
-                  <ambientLight intensity={0.5} />
-                  <ParticleSphere mode={activeMode} />
-                  <OrbitControls enableZoom={false} autoRotate={activeMode === 'default'} autoRotateSpeed={0.5} />
-                </Canvas>
-                
-                {/* Claims Feed Overlay */}
-                <div className="absolute inset-0 pointer-events-none">
-                  <AnimatePresence>
-                    {[
-                      { t: '10:42:03 AM', loc: '广东·深圳', type: '重疾理赔', amt: '¥500,000', pos: { top: '30%', left: '60%' } },
-                      { t: '11:15:20 AM', loc: '上海·浦东', type: '医疗报销', amt: '¥12,400', pos: { top: '55%', left: '75%' } },
-                      { t: '01:05:44 PM', loc: '北京·朝阳', type: '意外补偿', amt: '¥200,000', pos: { top: '20%', left: '45%' } }
-                    ].map((feed, i) => (
-                      <motion.div 
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: [0, 1, 1, 0], scale: [0.8, 1, 1, 0.9] }}
-                        transition={{ duration: 6, repeat: Infinity, delay: i * 2 }}
-                        className="claim-feed"
-                        style={feed.pos}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="w-[1px] h-12 bg-black/20" />
-                          <div>
-                            <p className="text-[9px] text-black/60 font-mono mb-1">{feed.t} | {feed.loc}</p>
-                            <p className="text-xs text-black font-medium">{feed.type} <span className="text-gold ml-2">{feed.amt}</span></p>
-                            <p className="text-[8px] text-green-600 uppercase tracking-tighter mt-1">Status: Execution Confirmed</p>
+               {/* Right: The Data Installation - Static Swiss Grid */}
+               <div className="col-span-12 lg:col-span-7 h-[600px] relative mt-20 lg:mt-0 flex items-center justify-center">
+                 <div className="w-full h-full relative border border-black/5 bg-white/50 backdrop-blur-sm rounded-3xl p-8 overflow-hidden">
+                    {/* Background Grid */}
+                    <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+                    
+                    {/* Data Visualization - Static Cards */}
+                    <div className="relative z-10 grid grid-cols-2 gap-4 h-full">
+                       <div className="bg-white/80 p-6 rounded-2xl border border-black/5 flex flex-col justify-between group hover:border-gold/30 transition-colors">
+                          <div className="flex justify-between items-start">
+                             <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                             </div>
+                             <span className="text-[9px] font-mono text-black/30">LATEST_CLAIM</span>
                           </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-           </div>
+                          <div>
+                             <h3 className="text-3xl font-din text-black mb-1">¥500,000</h3>
+                             <p className="text-xs text-black/50">Critical Illness Claim<br/>Approved in 2.4s</p>
+                          </div>
+                       </div>
+
+                       <div className="bg-blue-600/5 p-6 rounded-2xl border border-blue-100 flex flex-col justify-between group hover:border-blue-300 transition-colors">
+                          <div className="flex justify-between items-start">
+                             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                             </div>
+                             <span className="text-[9px] font-mono text-blue-800/50">AVG_TIME</span>
+                          </div>
+                          <div>
+                             <h3 className="text-3xl font-din text-blue-900 mb-1">0.8s</h3>
+                             <p className="text-xs text-blue-800/60">Global Payout Velocity<br/>AI Automated</p>
+                          </div>
+                       </div>
+
+                       <div className="col-span-2 bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-black/5 flex items-center justify-between">
+                          <div>
+                             <h4 className="text-sm font-medium text-black mb-1">Global Risk Map</h4>
+                             <p className="text-xs text-black/40">Real-time monitoring of 240+ regions</p>
+                          </div>
+                          <div className="flex gap-2">
+                             {[1,2,3,4,5].map(i => (
+                                <div key={i} className="w-1 h-8 bg-black/5 rounded-full" style={{ height: 16 + (i * 4) % 24 }} />
+                             ))}
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+               </div>
+            </div>
 
            {/* Round 7: Micro-Verification Logs */}
             <div className="mt-40 border-t border-black/5 pt-12">
@@ -542,7 +502,7 @@ const Pulse = () => {
                        <span className="text-[9px] font-mono text-black/40">[{log.id}]</span>
                        <span className="text-[11px] text-black flex-1 tracking-[0.2em] font-medium">{log.node}</span>
                        <div className="flex items-center gap-3">
-                          <div className={`w-1.5 h-1.5 rounded-full ${log.status === 'VERIFIED' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'bg-gold animate-pulse'}`} />
+                          <div className={`w-1.5 h-1.5 rounded-full ${log.status === 'VERIFIED' ? 'bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.4)]' : 'bg-gold animate-pulse'}`} />
                           <span className={`${log.status === 'VERIFIED' ? 'text-black/60' : 'text-gold'} text-[9px] font-mono font-bold tracking-tighter`}>{log.status}</span>
                        </div>
                     </div>
@@ -560,113 +520,17 @@ const Pulse = () => {
   )
 }
 
-function WireframeHouse() {
-  const [hovered, setHovered] = useState<string | null>(null)
-  
-  return (
-    <group rotation={[0.4, -0.4, 0]}>
-      {/* Foundation - The Body is a Temple */}
-      <mesh onPointerOver={() => setHovered('foundation')} onPointerOut={() => setHovered(null)}>
-        <boxGeometry args={[4.2, 0.4, 4.2]} />
-        <meshBasicMaterial 
-          wireframe 
-          transparent 
-          opacity={hovered === 'foundation' ? 0.9 : 0.2} 
-          color={hovered === 'foundation' ? '#D4AF37' : '#FFFFFF'} 
-        />
-      </mesh>
-      
-      {/* Pillars - Love is Weight */}
-      <group onPointerOver={() => setHovered('pillars')} onPointerOut={() => setHovered(null)}>
-        {[-1.8, 1.8].map((x, i) => 
-          [-1.8, 1.8].map((z, j) => (
-            <mesh key={`${i}-${j}`} position={[x, 1.6, z]}>
-              <boxGeometry args={[0.15, 3.2, 0.15]} />
-              <meshBasicMaterial 
-                transparent 
-                opacity={hovered === 'pillars' ? 0.9 : 0.3} 
-                color={hovered === 'pillars' ? '#D4AF37' : '#FFFFFF'} 
-              />
-            </mesh>
-          ))
-        )}
-        <mesh position={[0, 3.2, 0]}>
-          <boxGeometry args={[4, 0.1, 4]} />
-          <meshBasicMaterial transparent opacity={0.2} color="white" />
-        </mesh>
-      </group>
-
-      {/* Roof/Glass - Friend of Time */}
-      <mesh position={[0, 4.2, 0]} onPointerOver={() => setHovered('expansion')} onPointerOut={() => setHovered(null)}>
-        <boxGeometry args={[4.5, 1, 4.5]} />
-        <meshBasicMaterial 
-          wireframe 
-          transparent 
-          opacity={hovered === 'expansion' ? 0.8 : 0.1} 
-          color={hovered === 'expansion' ? '#D4AF37' : '#FFFFFF'} 
-        />
-      </mesh>
-
-      {hovered && (
-        <Html position={[0, 6, 0]} center>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 10 }} 
-            animate={{ opacity: 1, scale: 1, y: 0 }} 
-            className="blueprint-card min-w-[340px]"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <span className="text-gold text-[8px] tracking-[0.5em] uppercase">Structural Analysis</span>
-              <span className="text-black/30 font-mono text-[8px]">REF_SYS_4.0</span>
-            </div>
-            
-             <div className="space-y-4">
-               <div>
-                  <h4 className="text-black text-3xl font-serif mb-2 font-extralight">
-                    {hovered === 'foundation' && "肉身是圣殿"}
-                    {hovered === 'pillars' && "爱是责任的重量"}
-                    {hovered === 'expansion' && "时间的朋友"}
-                  </h4>
-                  <p className="text-gold/60 text-[10px] tracking-[0.4em] uppercase">
-                    {hovered === 'foundation' && "The Body is a Temple | 全球医疗系列"}
-                    {hovered === 'pillars' && "Love is Weight | 寿险与责任保障"}
-                    {hovered === 'expansion' && "Friend of Time | 财富传承架构"}
-                  </p>
-               </div>
-               
-               <p className="text-[11px] text-black/60 leading-relaxed italic">
-                 {hovered === 'foundation' && "“在财富积累之前，先确保地基不会因病塌陷。”"}
-                 {hovered === 'pillars' && "“当支柱不在场时，确保屋顶依然为家人遮风挡雨。”"}
-                 {hovered === 'expansion' && "“让现在的盈余，流向未来的匮乏。”"}
-               </p>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-black/10 flex flex-col gap-4">
-               <button className="ghost-button w-full">查看结构图纸 / View Blueprint</button>
-               <div className="flex justify-between items-center px-1">
-                  <span className="text-[8px] text-black/30 uppercase">Safety Rating: 99.9%</span>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gold/40" />)}
-                  </div>
-               </div>
-            </div>
-          </motion.div>
-        </Html>
-      )}
-    </group>
-  )
-}
-
 const Product = () => {
   return (
     <section id="product" className="relative min-h-screen bg-white flex flex-col items-center justify-center py-[spacing-section]">
        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)]" />
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,84,166,0.05)_0%,transparent_70%)]" />
        </div>
 
        <div className="container mx-auto px-12 md:px-24 z-10">
           <div className="asymmetric-layout mb-32">
              <div className="col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-                <span className="text-gold text-xs tracking-[1.5em] uppercase block mb-10 opacity-60">System Architecture / 04</span>
+                <span className="text-blue-600 text-xs tracking-[1.5em] uppercase block mb-10 opacity-60">System Architecture / 04</span>
                 <h2 className="text-7xl md:text-8xl font-extralight tracking-tighter leading-none text-black">
                    生命建筑系统<br />
                    <span className="text-black/20 italic text-5xl md:text-7xl">Architecture HUD</span>
@@ -674,26 +538,72 @@ const Product = () => {
              </div>
           </div>
           
-          <div className="relative w-full h-[800px] blueprint-card p-0 overflow-hidden group">
-             <div className="absolute top-10 left-10 z-20 flex gap-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-[9px] font-mono text-black/30 uppercase tracking-widest">REAL-TIME_MODELING</span>
+          {/* Static Blueprint Card - Replacing 3D Canvas */}
+          <div className="relative w-full max-w-4xl mx-auto h-[600px] border border-black/5 bg-[#F9FAFB] rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-700 group">
+             {/* Blueprint Grid Background */}
+             <div className="absolute inset-0 z-0 opacity-10" 
+                  style={{ backgroundImage: 'linear-gradient(#0054A6 1px, transparent 1px), linear-gradient(90deg, #0054A6 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+             />
+             
+             {/* Realistic Blueprint Image */}
+             <div className="absolute inset-0 z-10 flex items-center justify-center p-20">
+                 <img 
+                   src="/blueprint_house.png" 
+                   alt="Architectural Blueprint" 
+                   className="w-full h-full object-contain opacity-90 mix-blend-multiply filter contrast-125 transition-transform duration-1000 group-hover:scale-105"
+                 />
              </div>
-             <Canvas camera={{ position: [0, 5, 14], fov: 35 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={2} />
-                <WireframeHouse />
-                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.3} />
-             </Canvas>
-             <div className="absolute bottom-10 right-10 z-20">
-                <span className="text-[10px] font-mono text-black/30 uppercase tracking-widest">[ DRAG_TO_INSPECT_STRUCTURE ]</span>
+
+             {/* Content Overlay */}
+             <div className="relative z-20 h-full flex flex-col justify-between p-12 pointer-events-none">
+                <div className="flex justify-between items-start">
+                   <div className="flex gap-4 items-center">
+                      <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                      <span className="text-[10px] font-mono text-blue-900/40 uppercase tracking-widest">Blueprint_View_2.0</span>
+                   </div>
+                   <div className="text-right pointer-events-auto">
+                      <h3 className="text-2xl font-serif text-black mb-1">稳固架构</h3>
+                      <p className="text-[10px] text-black/40 uppercase tracking-widest">Solid Structure</p>
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-8 pointer-events-auto">
+                   {[
+                      { title: 'Foundation', cn: '地基', desc: '全球顶尖医疗资源网络覆盖' },
+                      { title: 'Pillars', cn: '支柱', desc: '千万级保额提供强力支撑' },
+                      { title: 'Roof', cn: '屋顶', desc: '家族财富传承与税务筹划' }
+                   ].map((item, i) => (
+                      <div key={i} className="group/item cursor-pointer">
+                         <div className="w-8 h-[1px] bg-blue-600 mb-4 group-hover/item:w-16 transition-all duration-500" />
+                         <h4 className="text-lg font-serif text-black mb-1">{item.cn}</h4>
+                         <p className="text-[10px] text-blue-900/50 uppercase tracking-widest mb-3">{item.title}</p>
+                         <p className="text-xs text-black/40 leading-relaxed max-w-[180px]">{item.desc}</p>
+                      </div>
+                   ))}
+                </div>
+
+                <div className="flex justify-between items-end border-t border-blue-900/10 pt-8 pointer-events-auto">
+                   <div className="flex gap-8">
+                      <div>
+                         <span className="block text-[32px] font-din text-black leading-none">99.9%</span>
+                         <span className="text-[9px] text-black/30 tracking-widest uppercase">Safety Rating</span>
+                      </div>
+                      <div>
+                         <span className="block text-[32px] font-din text-black leading-none">AAA</span>
+                         <span className="text-[9px] text-black/30 tracking-widest uppercase">Credit Level</span>
+                      </div>
+                   </div>
+                   <button className="px-8 py-3 bg-black text-white text-xs tracking-widest uppercase hover:bg-blue-900 transition-colors">
+                      Download Kit
+                   </button>
+                </div>
              </div>
           </div>
 
           <div className="mt-20 text-center flex flex-col items-center gap-6">
-             <div className="w-1 h-20 bg-gradient-to-b from-gold/40 to-transparent" />
-             <span className="text-[12px] text-black/40 tracking-[0.6em] uppercase font-mono mb-4 text-glow">
-                STRUCTURAL_INTEGRITY_VERIFIED_99.9%
+             <div className="w-1 h-20 bg-gradient-to-b from-blue-600/20 to-transparent" />
+             <span className="text-[12px] text-black/40 tracking-[0.6em] uppercase font-mono mb-4">
+                STRUCTURAL_INTEGRITY_VERIFIED
              </span>
           </div>
        </div>
