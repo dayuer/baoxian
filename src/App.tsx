@@ -82,7 +82,7 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
                <motion.img 
                  initial={{ scale: 1.2, opacity: 0 }}
                  animate={{ scale: 1, opacity: 0.08 }}
-                 src="/data_sphere.png" 
+                 src="./data_sphere.png" 
                  alt="Art" 
                  className="absolute inset-0 w-full h-full object-cover" 
                />
@@ -258,7 +258,7 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
       <div className="absolute inset-0 z-0">
         <div className="hero-canvas-blur absolute inset-0 z-10 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
         <img 
-          src="/hero_lifestyle.png" 
+          src="./hero_lifestyle.png" 
           alt="" 
           className="w-full h-full object-cover opacity-80" 
         />
@@ -293,7 +293,7 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
               >
                  <div className="flex items-start gap-6">
                     <div className="w-14 h-14 rounded-full p-[2px] border border-black/5 flex-shrink-0">
-                       <img src="/agent_profile.png" className="w-full h-full rounded-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity" />
+                       <img src="./agent_profile.png" className="w-full h-full rounded-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity" />
                     </div>
                     <div>
                        <div className="flex items-center gap-2 mb-2">
@@ -583,7 +583,7 @@ const Product = () => {
              {/* Realistic Blueprint Image */}
              <div className="absolute inset-0 z-10 flex items-center justify-center p-24">
                  <img 
-                   src="/blueprint_house.png" 
+                   src="./blueprint_house.png" 
                    alt="Architectural Blueprint" 
                    className="w-full h-full object-contain opacity-80 mix-blend-multiply filter contrast-[1.1] brightness-[0.98] transition-transform duration-[2s] group-hover:scale-105"
                  />
@@ -839,21 +839,6 @@ export default function App() {
     <div className="bg-[#F7F8FA] selection:bg-gold selection:text-black">
       <Header />
       
-      {/* Round 5: HUD Floating Sidebar */}
-      <div className="hud-sidebar hidden lg:flex">
-         {[
-           { icon: '◉', label: 'Dashboard' },
-           { icon: '✦', label: 'AI Guide' },
-           { icon: '⇄', label: 'Nodes' },
-           { icon: '⚓', label: 'Support' }
-         ].map((item, i) => (
-           <div key={i} className="hud-item group relative">
-              <span className="text-xl">{item.icon}</span>
-              <span className="absolute right-full mr-4 px-3 py-1 bg-black text-white text-[9px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all rounded transition-all pointer-events-none">{item.label}</span>
-           </div>
-         ))}
-      </div>
-
       <Hero activeStage={activeStage} setActiveStage={setActiveStage} />
       <Pulse />
       <Product />
