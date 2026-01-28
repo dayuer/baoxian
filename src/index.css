@@ -110,16 +110,37 @@
 
   /* Navigation & HUD */
   .cockpit-capsule {
-    @apply fixed left-1/2 -translate-x-1/2 flex items-center justify-between px-10 z-[100];
+    @apply fixed left-1/2 -translate-x-1/2 flex items-center justify-between px-6 z-[100];
     transition: var(--transition-ultra);
-    width: calc(100% - 80px);
-    max-width: 1400px;
-    height: 72px;
+    width: calc(100% - 32px);
+    height: 64px;
     background: white;
     border-radius: 36px;
     border: 1px solid rgba(0, 84, 166, 0.05);
     box-shadow: 0 40px 100px rgba(0, 84, 166, 0.05);
-    top: 24px;
+    top: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .cockpit-capsule {
+      @apply px-8;
+      width: calc(100% - 48px);
+      height: 68px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cockpit-capsule {
+      @apply px-10;
+      width: calc(100% - 80px);
+      height: 72px;
+      top: 24px;
+    }
+  }
+
+  /* Mobile Grid Utility */
+  .container {
+    @apply max-w-7xl mx-auto px-6 lg:px-24;
   }
 
   .spotlight-input {
