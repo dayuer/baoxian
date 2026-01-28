@@ -321,11 +321,11 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5, duration: 1.5 }}
-                className="w-full bg-white/60 backdrop-blur-3xl p-16 rounded-[3rem] border border-white/80 shadow-[0_60px_120px_rgba(0,84,166,0.05)] relative overflow-hidden"
+                 className="w-full max-w-full bg-white/60 backdrop-blur-3xl p-5 sm:p-8 lg:p-16 rounded-[2rem] lg:rounded-[3rem] border border-white/80 shadow-[0_60px_120px_rgba(0,84,166,0.05)] relative overflow-hidden"
               >
                   <div className="relative z-10 flex flex-col gap-8 lg:gap-12">
                    {/* Life-Stage Navigator */}
-                   <div className="flex flex-wrap lg:flex-nowrap gap-8 lg:gap-20 border-b border-black/5 pb-10">
+                   <div className="flex flex-wrap lg:flex-nowrap gap-6 lg:gap-20 border-b border-black/5 pb-8 lg:pb-10">
                       {[
                         { id: 'Founders', label: '创业者', sub: 'Enterprise' }, 
                         { id: 'Guardians', label: '守护者', sub: 'Heritage' }, 
@@ -336,10 +336,10 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                           className={`group cursor-pointer transition-all duration-700 flex flex-col items-start gap-2 lg:gap-4 whitespace-nowrap ${activeStage === item.id ? 'opacity-100 scale-105' : 'opacity-20 hover:opacity-40'}`}
                           onClick={() => setActiveStage(item.id)}
                         >
-                           <span className="text-2xl lg:text-4xl font-serif font-extralight text-black">{item.label}</span>
-                           <span className="text-[9px] lg:text-[11px] tracking-[0.4em] uppercase font-mono text-black/60 relative whitespace-nowrap">
+                           <span className="text-xl lg:text-4xl font-serif font-extralight text-black">{item.label}</span>
+                           <span className="text-[8px] lg:text-[11px] tracking-[0.2em] lg:tracking-[0.4em] uppercase font-mono text-black/60 relative">
                               {item.sub}
-                              {activeStage === item.id && <motion.div layoutId="underline" className="absolute -bottom-6 lg:-bottom-10 left-0 w-full h-[2px] lg:h-[3px] bg-trust-blue" />}
+                              {activeStage === item.id && <motion.div layoutId="underline" className="absolute -bottom-4 lg:-bottom-10 left-0 w-full h-[2px] lg:h-[3px] bg-trust-blue" />}
                            </span>
                         </div>
                       ))}
@@ -368,9 +368,9 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                             />
                          </div>
                          
-                         <button className="flex items-center justify-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 whitespace-nowrap group/btn hover:-translate-y-0.5 mt-2 md:mt-0">
-                            <span className="text-sm tracking-[0.2em] font-medium uppercase">Activate // 启动</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
+                         <button className="flex items-center justify-center gap-3 px-6 lg:px-10 py-4 lg:py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 group/btn hover:-translate-y-0.5 mt-4 md:mt-0">
+                            <span className="text-xs lg:text-sm tracking-[0.2em] font-medium uppercase whitespace-nowrap">Activate // 启动</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="flex-shrink-0 opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
                          </button>
                       </div>
 
