@@ -287,9 +287,9 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                 <span className="text-[10px] tracking-[0.4em] lg:tracking-[0.8em] uppercase font-bold text-black/60">Standard of Protection</span>
               </div>
               
-              <h1 className="hero-headline mb-12 lg:mb-16">
+              <h1 className="hero-headline mb-12 lg:mb-16 text-4xl sm:text-5xl lg:text-7xl">
                 于不确定中，<br />
-                <span className="italic text-black/20 font-extralight tracking-tight">建构生命的厚度。</span>
+                <span className="italic text-black/20 font-extralight tracking-tight block sm:inline">建构生命的厚度。</span>
               </h1>
 
               {/* Agent Card */}
@@ -441,8 +441,8 @@ const Pulse = () => {
              {/* Left Column: Data Installation */}
              <div className="col-span-12 lg:col-span-5 flex flex-col justify-center">
                 <span className="pulse-label whitespace-nowrap">Real-time Pulse / 02</span>
-                <h2 className="section-title text-black whitespace-nowrap">
-                   系统实时<span className="italic text-black/20 ml-6">核保脉动</span>
+                <h2 className="section-title text-black">
+                   系统实时<span className="italic text-black/20 ml-2 lg:ml-6">核保脉动</span>
                 </h2>
                 <p className="text-xl text-black/40 font-extralight leading-loose mb-16 max-w-lg">
                    基于“朱砂”核保标准，每秒处理万次风险校验，确保每一单防御指令的绝对精确。
@@ -503,13 +503,13 @@ const Pulse = () => {
                       </div>
 
                       {/* Full Width Info Card */}
-                      <div className="col-span-1 md:col-span-2 glass-card p-8 lg:p-12 rounded-3xl border-t-2 border-trust-blue/10">
-                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-10">
-                            <div className="flex items-center gap-6">
+                      <div className="col-span-1 md:col-span-2 glass-card p-6 lg:p-12 rounded-3xl border-t-2 border-trust-blue/10">
+                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 mb-10">
+                            <div className="flex items-center gap-4 lg:gap-6">
                                <div className="h-10 w-[2px] bg-trust-blue" />
                                <div>
-                                  <h4 className="text-xl font-serif text-black whitespace-nowrap">全域理赔链路已激活</h4>
-                                  <p className="text-[11px] text-black/30 font-mono uppercase tracking-widest mt-1 whitespace-nowrap">Status: Active // Node: AX-88</p>
+                                  <h4 className="text-lg lg:text-xl font-serif text-black">全域理赔链路已激活</h4>
+                                  <p className="text-[10px] lg:text-[11px] text-black/30 font-mono uppercase tracking-widest mt-1">Status: Active // Node: AX-88</p>
                                </div>
                             </div>
                             <div className="flex -space-x-3">
@@ -568,7 +568,7 @@ const Product = () => {
           </div>
           
           {/* Static Blueprint Card - Replacing 3D Canvas */}
-          <div className="relative w-full max-w-6xl mx-auto min-h-[500px] lg:aspect-[16/9] border border-black/5 bg-[#F9FAFB] rounded-[2rem] lg:rounded-[3rem] overflow-hidden hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-1000 group">
+          <div className="relative w-full max-w-7xl mx-auto min-h-[1000px] lg:min-h-[1100px] border border-black/10 bg-[#F9FAFB] rounded-[3rem] lg:rounded-[4rem] overflow-hidden shadow-2xl transition-all duration-1000 group flex flex-col">
              {/* Blueprint HUD Lines */}
              <div className="absolute top-1/4 left-0 w-full h-[1px] bg-trust-blue/5 z-20" />
              <div className="absolute top-3/4 left-0 w-full h-[1px] bg-trust-blue/5 z-20" />
@@ -583,18 +583,18 @@ const Product = () => {
                   style={{ backgroundImage: 'linear-gradient(#0054A6 1px, transparent 1px), linear-gradient(90deg, #0054A6 1px, transparent 1px)', backgroundSize: '60px 60px' }} 
              />
              
-             {/* Realistic Blueprint Image */}
-             <div className="absolute inset-0 z-10 flex items-center justify-center p-8 lg:p-24">
+             {/* Realistic Blueprint Image - Full Edge-to-Edge Cover */}
+             <div className="absolute inset-0 z-10 pointer-events-none">
                   <img 
                     src="./blueprint_house.png" 
                     alt="Architectural Blueprint" 
-                    className="w-full h-full object-contain opacity-80 mix-blend-multiply filter contrast-[1.1] brightness-[0.98] transition-transform duration-[2s] group-hover:scale-105"
+                    className="w-full h-full object-cover opacity-30 lg:opacity-50 mix-blend-multiply filter contrast-[1.1] brightness-[0.98] transition-transform duration-[2s] group-hover:scale-110"
                   />
              </div>
 
              {/* Content Overlay */}
-             <div className="relative z-30 h-full flex flex-col justify-between p-8 lg:p-16 pointer-events-none">
-                <div className="flex justify-between items-start">
+             <div className="relative z-30 flex-1 flex flex-col justify-between p-8 lg:p-16">
+                <div className="absolute top-8 left-8 lg:top-16 lg:left-16 pointer-events-none">
                    <div className="flex gap-4 lg:gap-6 items-center">
                       <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-trust-blue animate-pulse" />
                       <div className="flex flex-col">
@@ -602,39 +602,39 @@ const Product = () => {
                         <span className="text-[8px] lg:text-[9px] font-mono text-black/20 uppercase tracking-widest mt-1">Ref_System_Integrity_Verified</span>
                       </div>
                    </div>
-                   <div className="text-right pointer-events-auto hidden md:block">
-                      <h3 className="text-3xl lg:text-4xl font-serif text-black mb-2">稳固架构</h3>
-                      <p className="text-[10px] lg:text-[12px] text-black/40 uppercase tracking-[0.6em] font-mono">Solid Structure Protocol</p>
-                   </div>
+                </div>
+                <div className="absolute top-8 right-8 lg:top-16 lg:right-16 text-right hidden md:block">
+                   <h3 className="text-3xl lg:text-4xl font-serif text-black mb-2">稳固架构</h3>
+                   <p className="text-[10px] lg:text-[12px] text-black/40 uppercase tracking-[0.6em] font-mono">Solid Structure Protocol</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 pointer-events-auto max-w-4xl mt-20 lg:mt-0">
+                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pointer-events-auto w-full mt-auto relative z-40 mb-6 lg:mb-12">
                    {[
-                      { title: 'Foundation', cn: '生命地基', desc: '覆盖全球 240+ 顶级医疗资源网络，确保资产底层稳健。' },
-                      { title: 'Pillars', cn: '保障支柱', desc: '千万级保额提供强力金融支撑，抵御无法预见的风险波动。' },
-                      { title: 'Roof', cn: '财富屋顶', desc: '通过跨代财富传承协议与税务筹划，构建永久资产掩体。' }
+                      { title: 'Foundation', cn: '生命地基', desc: '覆盖全球 240+ 医疗资源网络，确保资产底层稳健。' },
+                      { title: 'Pillars', cn: '保障支柱', desc: '千万级保额提供强力金融支撑，抵御无法预见的风险。' },
+                      { title: 'Roof', cn: '财富屋顶', desc: '通过跨代传承协议与税务筹划，构建永久资产掩体。' }
                    ].map((item, i) => (
-                      <div key={i} className="group/item cursor-pointer">
-                         <div className="w-8 lg:w-12 h-[2px] bg-trust-blue mb-4 lg:mb-6 group-hover/item:w-20 transition-all duration-700" />
-                         <h4 className="text-xl lg:text-2xl font-serif text-black mb-2">{item.cn}</h4>
-                         <p className="text-[9px] lg:text-[11px] text-trust-blue/40 uppercase tracking-[0.4em] mb-4 font-mono">{item.title}</p>
-                         <p className="text-xs lg:text-sm text-black/40 leading-relaxed font-extralight">{item.desc}</p>
+                      <div key={i} className="group/item cursor-pointer bg-white/95 backdrop-blur-2xl p-8 lg:p-10 rounded-[2.5rem] border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:-translate-y-3 transition-all duration-700">
+                         <div className="w-10 h-[3px] bg-trust-blue mb-6 lg:mb-8 group-hover/item:w-16 transition-all duration-700" />
+                         <h4 className="text-2xl lg:text-3xl font-serif text-black mb-2">{item.cn}</h4>
+                         <p className="text-[10px] lg:text-[11px] text-trust-blue/40 uppercase tracking-[0.4em] mb-6 font-mono">{item.title}</p>
+                         <p className="text-sm lg:text-base text-black/40 leading-relaxed font-extralight">{item.desc}</p>
                       </div>
                    ))}
                 </div>
 
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-t border-black/5 pt-8 lg:pt-12 pointer-events-auto gap-8 lg:gap-0">
-                   <div className="flex gap-12 lg:gap-16">
+                 <div className="flex flex-col md:flex-row justify-between items-center border-t border-black/5 pt-12 lg:pt-16 pointer-events-auto gap-8 lg:gap-0 mt-8">
+                   <div className="flex gap-16 lg:gap-24 w-full lg:w-auto justify-between lg:justify-start">
                       <div className="flex flex-col">
-                         <span className="text-3xl lg:text-4xl font-din text-black leading-none mb-2">99.9%</span>
-                         <span className="text-[9px] lg:text-[10px] text-black/30 tracking-[0.4em] uppercase font-mono">Safety Rating</span>
+                         <span className="text-4xl lg:text-5xl font-din text-black leading-none mb-3">99.9%</span>
+                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em] uppercase font-mono">Safety Rating</span>
                       </div>
                       <div className="flex flex-col">
-                         <span className="text-3xl lg:text-4xl font-din text-black leading-none mb-2">AAA</span>
-                         <span className="text-[9px] lg:text-[10px] text-black/30 tracking-[0.4em] uppercase font-mono">Credit Level</span>
+                         <span className="text-4xl lg:text-5xl font-din text-black leading-none mb-3">AAA</span>
+                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em] uppercase font-mono">Credit Level</span>
                       </div>
                    </div>
-                   <button className="cta-vermilion w-full md:w-auto text-center">
+                   <button className="cta-vermilion w-full md:w-auto text-center py-7 px-16">
                       Download Blueprint Kit
                    </button>
                 </div>
