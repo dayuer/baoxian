@@ -198,20 +198,16 @@ const Header = () => {
                    <div className="flex items-center gap-6">
                       <VariableLogo />
                       <div className="h-6 w-px bg-black/10" />
-                      <div className="flex items-center gap-8 text-[11px] uppercase tracking-widest text-black">
-                         <a href="#hero" className="hover:text-gold transition-colors">精选</a>
-                         <a href="#pulse" className="hover:text-gold transition-colors">定制</a>
-                         <a href="#product" className="hover:text-gold transition-colors">理赔</a>
+                      <div className="flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-mono text-black">
+                         <a href="#hero" className="hover:text-trust-blue transition-colors">Curated</a>
+                         <a href="#pulse" className="hover:text-trust-blue transition-colors">Analysis</a>
+                         <a href="#product" className="hover:text-trust-blue transition-colors">Integrity</a>
                       </div>
                    </div>
 
                   {/* Central Spotlight Search */}
                   <div className="hidden md:flex flex-1 justify-center px-10">
-                     <input 
-                       type="text" 
-                       placeholder="Type 'Tesla' or 'Diabetes'..." 
-                       className="spotlight-input placeholder:text-black/40"
-                     />
+                     <span className="text-[10px] text-black/20 font-mono tracking-widest">QUERY_ENGINE_v4.2 // RUNNING</span>
                   </div>
 
                   <div className="flex items-center gap-6">
@@ -237,6 +233,23 @@ const Header = () => {
 
 const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveStage: (s: string) => void }) => {
   const [isSoundOn, setIsSoundOn] = useState(false)
+  const [activePlaceholder, setActivePlaceholder] = useState("唤醒 AI 风险规划师...")
+  const [inputValue, setInputValue] = useState("")
+
+  useEffect(() => {
+    const placeholders = [
+      "唤醒 AI 风险规划师...",
+      "输入您的年龄或关心的风险...",
+      "比如：给刚买的特斯拉买保险",
+      "或者：全家人的健康保障方案"
+    ]
+    let i = 0
+    const timer = setInterval(() => {
+      i = (i + 1) % placeholders.length
+      setActivePlaceholder(placeholders[i])
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [])
 
 
   return (
@@ -268,7 +281,7 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
               
               <h1 className="hero-headline mb-16">
                 于不确定中，<br />
-                <span className="italic text-black/30 font-extralight tracking-tight">建构生命的厚度。</span>
+                <span className="italic text-black/20 font-extralight tracking-tight">建构生命的厚度。</span>
               </h1>
 
               {/* Agent Card: Redesigned to be less obtrusive and more integrated */}
@@ -276,19 +289,19 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.5, duration: 1.5 }}
-                className="glass-card rounded-xl p-6 max-w-[320px] cursor:pointer hover:bg-white/90 transition-all duration-500 border-l-2 border-l-gold/20"
+                className="glass-card rounded-xl p-8 max-w-[340px] border-l-4 border-l-trust-blue shadow-2xl"
               >
-                 <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-full p-[2px] border border-black/5 flex-shrink-0">
-                       <img src="/agent_profile.png" className="w-full h-full rounded-full object-cover grayscale opacity-80" />
+                 <div className="flex items-start gap-6">
+                    <div className="w-14 h-14 rounded-full p-[2px] border border-black/5 flex-shrink-0">
+                       <img src="/agent_profile.png" className="w-full h-full rounded-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity" />
                     </div>
                     <div>
-                       <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[9px] text-green-600 tracking-widest uppercase font-bold bg-green-50 px-2 py-0.5 rounded-full">Active</span>
-                          <span className="text-[9px] text-black/30 font-mono">ID: 8829_AX</span>
+                       <div className="flex items-center gap-2 mb-2">
+                          <span className="text-[10px] text-trust-blue tracking-widest uppercase font-bold bg-blue-50 px-3 py-1 rounded-full">Active</span>
+                          <span className="text-[9px] text-black/20 font-mono">NODE_AX_88</span>
                        </div>
-                       <h3 className="text-lg font-serif text-black mb-0.5">陈先生</h3>
-                       <p className="text-[9px] text-black/40 tracking-[0.2em] uppercase">Senior Risk Officer</p>
+                       <h3 className="text-xl font-serif text-black mb-1">陈先生</h3>
+                       <p className="text-[10px] text-black/40 tracking-[0.3em] uppercase font-mono">Senior Risk Architect</p>
                     </div>
                  </div>
               </motion.div>
@@ -297,31 +310,28 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
             {/* Right Column: Interaction Console - Expanded & Fused */}
             <div className="col-span-12 lg:col-span-7 h-full flex items-center">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 1.2 }}
-                className="w-full bg-white/40 backdrop-blur-xl p-12 pr-16 rounded-[2rem] border border-white/60 shadow-[0_40px_100px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.04)] transition-all duration-700 relative overflow-hidden group"
+                transition={{ delay: 0.5, duration: 1.5 }}
+                className="w-full bg-white/60 backdrop-blur-3xl p-16 rounded-[3rem] border border-white/80 shadow-[0_60px_120px_rgba(0,84,166,0.05)] relative overflow-hidden"
               >
-                 {/* Subtle background gradient for fusion */}
-                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-white/80 to-transparent pointer-events-none opacity-50" />
-                 
                  <div className="relative z-10 flex flex-col gap-12">
                    {/* Life-Stage Navigator */}
-                   <div className="flex gap-16 border-b border-black/5 pb-10">
+                   <div className="flex gap-20 border-b border-black/5 pb-10">
                       {[
-                        { id: 'Founders', label: '创业者', sub: 'Business' }, 
-                        { id: 'Guardians', label: '守护者', sub: 'Family' }, 
-                        { id: 'Explorers', label: '探索者', sub: 'Life' }
+                        { id: 'Founders', label: '创业者', sub: 'Enterprise' }, 
+                        { id: 'Guardians', label: '守护者', sub: 'Heritage' }, 
+                        { id: 'Explorers', label: '探索者', sub: 'Horizon' }
                       ].map(item => (
                         <div 
                           key={item.id}
-                          className={`group cursor-pointer transition-all duration-500 flex flex-col items-start gap-3 ${activeStage === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                          className={`group cursor-pointer transition-all duration-700 flex flex-col items-start gap-4 ${activeStage === item.id ? 'opacity-100 scale-105' : 'opacity-20 hover:opacity-40'}`}
                           onClick={() => setActiveStage(item.id)}
                         >
-                           <span className={`text-3xl font-serif font-extralight ${activeStage === item.id ? 'text-black' : 'text-black'}`}>{item.label}</span>
-                           <span className="text-[10px] tracking-[0.3em] uppercase font-mono text-black/40 relative pl-1">
+                           <span className="text-4xl font-serif font-extralight text-black">{item.label}</span>
+                           <span className="text-[11px] tracking-[0.4em] uppercase font-mono text-black/60 relative">
                               {item.sub}
-                              {activeStage === item.id && <motion.div layoutId="underline" className="absolute -bottom-10 left-0 w-full h-[2px] bg-gradient-to-r from-gold to-transparent" />}
+                              {activeStage === item.id && <motion.div layoutId="underline" className="absolute -bottom-10 left-0 w-full h-[3px] bg-trust-blue" />}
                            </span>
                         </div>
                       ))}
@@ -337,20 +347,41 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                       </p>
                    </div>
 
-                   <div className="flex items-center gap-0 group/input relative mt-2 bg-white rounded-2xl p-2 shadow-sm border border-black/5 transition-all hover:shadow-md hover:border-black/10">
-                      <div className="flex-1 px-6 py-4 flex items-center gap-4">
-                         <span className="text-black/10 text-xl font-light">/</span>
-                         <input 
-                           type="text" 
-                           placeholder="唤醒 AI 风险规划师..."
-                           className="w-full bg-transparent border-none outline-none text-xl font-light placeholder:text-black/20 text-black"
-                         />
+                   <div className="flex flex-col gap-6">
+                      <div className="flex items-center gap-0 group/input relative mt-2 bg-white rounded-2xl p-2 shadow-sm border border-black/5 transition-all hover:shadow-md hover:border-black/10">
+                         <div className="flex-1 px-6 py-4 flex items-center gap-4">
+                            <span className="text-trust-blue text-xl font-light">/</span>
+                            <input 
+                              type="text" 
+                              value={inputValue}
+                              onChange={(e) => setInputValue(e.target.value)}
+                              placeholder={activePlaceholder}
+                              className="w-full bg-transparent border-none outline-none text-xl font-light placeholder:text-black/20 text-black"
+                            />
+                         </div>
+                         
+                         <button className="flex items-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 whitespace-nowrap group/btn hover:-translate-y-0.5">
+                            <span className="text-sm tracking-[0.2em] font-medium uppercase">Activate // 启动</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
+                         </button>
                       </div>
-                      
-                      <button className="flex items-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 whitespace-nowrap group/btn hover:-translate-y-0.5">
-                         <span className="text-sm tracking-[0.2em] font-medium">启动</span>
-                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
-                      </button>
+
+                      {/* Suggestion Chips */}
+                      <div className="flex gap-4 flex-wrap px-4">
+                        {[
+                          "刚买了一辆特斯拉 Model 3",
+                          "给 60 岁的父母配置保险",
+                          "我的创业公司需要资产保护"
+                        ].map((suggestion, i) => (
+                          <div 
+                            key={i} 
+                            onClick={() => setInputValue(suggestion)}
+                            className="px-4 py-1.5 rounded-full border border-black/5 bg-black/[0.02] text-[10px] text-black/40 hover:text-trust-blue hover:border-trust-blue/30 cursor-pointer transition-all uppercase tracking-widest"
+                          >
+                            {suggestion}
+                          </div>
+                        ))}
+                      </div>
                    </div>
                  </div>
               </motion.div>
@@ -391,96 +422,98 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
 
 
 const Pulse = () => {
-    // activeMode removed
-  
   return (
-    <section id="pulse" className="pulse-section min-h-screen">
-       <div className="section-mask-top" />
+    <section id="pulse" className="pulse-section min-h-screen relative overflow-hidden">
+       {/* Background decorative elements */}
+       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-trust-blue/5 to-transparent pointer-events-none" />
        
         <div className="container mx-auto px-12 md:px-24">
            {/* Intelligence Header */}
-           <div className="flex flex-col md:flex-row justify-between items-end mb-32 border-b border-black/10 pb-10">
-              <div className="max-w-2xl">
+           <div className="flex flex-col md:flex-row justify-between items-end mb-40 border-b border-black/5 pb-12">
+              <div className="max-w-3xl">
                  <span className="pulse-label">Real-time Trust Protocol / 实时信任协议</span>
-                 <h2 className="text-7xl md:text-8xl text-black font-extralight leading-[0.9] tracking-tighter">
-                    智性<br /><span className="italic text-black/20">检索系统</span>
+                 <h2 className="section-title text-black">
+                    智性<span className="italic text-black/20 ml-6">检索系统</span>
                  </h2>
               </div>
-              <div className="flex gap-4 mt-8 md:mt-0">
+              <div className="flex gap-4 mt-8 md:mt-0 pb-4">
                  {['全球承保', '极速理赔', 'AI风控'].map(tag => (
                    <div key={tag} className="filter-chip">{tag}</div>
                  ))}
                  <div className="filter-chip active">ACTIVE</div>
-              </div>
-           </div>
+               </div>
+            </div>
 
-           <div className="asymmetric-layout">
-              {/* Left: Swiss Style Pillars */}
-              <div className="col-span-12 lg:col-span-5 space-y-32 z-20">
-                 {[
-                    { id: 'capital', label: 'NETWORK', val: '98', unit: '%', desc: '覆盖全球顶级金融保障，调取高达 50 亿美金承保容量。', jade: true },
-                    { id: 'speed', label: 'EXECUTION', val: '0.8', unit: 'sec', desc: '基于“朱砂核保协议”，实现资产赔付的秒级智能拨付。', jade: false },
-                    { id: 'risk', label: 'MONITOR', val: '24.5', unit: 'G+', desc: '实时监控全球风险波形，在威胁发生前部署自动化方案。', jade: true }
-                 ].map((stat, i) => (
-                   <motion.div 
-                     key={i}
-                     className="flex flex-col group cursor-pointer border-l-2 border-transparent hover:border-gold pl-8 transition-all duration-700"
-                   >
-                      <div className="flex items-center gap-3">
-                         <span className="pulse-label opacity-60">PROTOCOL_0{i+1} // {stat.label}</span>
-                         {stat.jade && <span className="jade-accent">● LIVE_GROWTH</span>}
-                      </div>
-                      <div className="flex items-baseline mt-4 mb-2">
-                         <span className="pulse-number font-din text-black">{stat.val}</span>
-                         <span className="pulse-unit font-din text-black">{stat.unit}</span>
+            <div className="asymmetric-layout">
+               {/* Left: Swiss Style Pillars */}
+               <div className="col-span-12 lg:col-span-5 space-y-24 z-20">
+                  {[
+                     { id: 'capital', label: 'NETWORK', val: '98', unit: '%', desc: '覆盖全球顶级金融保障，调取高达 50 亿美金承保容量。' },
+                     { id: 'speed', label: 'EXECUTION', val: '0.8', unit: 'sec', desc: '基于“朱砂核保协议”，实现资产赔付的秒级智能拨付。' },
+                     { id: 'risk', label: 'MONITOR', val: '24.5', unit: 'G+', desc: '实时监控全球风险波形，在威胁发生前部署自动化方案。' }
+                  ].map((stat, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.2, duration: 1 }}
+                      className="flex flex-col group cursor-pointer border-l-2 border-transparent hover:border-trust-blue pl-10 transition-all duration-700"
+                    >
+                       <span className="pulse-label">PROTOCOL_0{i+1} // {stat.label}</span>
+                       <div className="flex items-baseline mb-4">
+                          <span className="pulse-number text-black">{stat.val}</span>
+                          <span className="pulse-unit">{stat.unit}</span>
                        </div>
-                      <p className="pulse-desc text-black/60 text-lg font-light leading-relaxed">{stat.desc}</p>
-                   </motion.div>
-                 ))}
-              </div>
+                       <p className="text-black/50 text-xl font-extralight leading-relaxed max-w-sm">{stat.desc}</p>
+                    </motion.div>
+                  ))}
+               </div>
 
                {/* Right: The Data Installation - Static Swiss Grid */}
-               <div className="col-span-12 lg:col-span-7 h-[600px] relative mt-20 lg:mt-0 flex items-center justify-center">
-                 <div className="w-full h-full relative border border-black/5 bg-white/50 backdrop-blur-sm rounded-3xl p-8 overflow-hidden">
+               <div className="col-span-12 lg:col-span-7 relative mt-20 lg:mt-0 flex items-center justify-center">
+                 <div className="w-full aspect-[4/3] relative bg-white rounded-[2.5rem] p-12 overflow-hidden border border-black/5 shadow-2xl">
                     {/* Background Grid */}
-                    <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+                    <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
                     
                     {/* Data Visualization - Static Cards */}
-                    <div className="relative z-10 grid grid-cols-2 gap-4 h-full">
-                       <div className="bg-white/80 p-6 rounded-2xl border border-black/5 flex flex-col justify-between group hover:border-gold/30 transition-colors">
+                    <div className="relative z-10 grid grid-cols-2 gap-8 h-full">
+                       <div className="glass-card p-10 rounded-3xl flex flex-col justify-between">
                           <div className="flex justify-between items-start">
-                             <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-trust-blue shadow-inner">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                              </div>
-                             <span className="text-[9px] font-mono text-black/30">LATEST_CLAIM</span>
+                             <span className="text-[10px] font-mono text-black/20 tracking-tighter uppercase">LATEST_CLAIM</span>
                           </div>
                           <div>
-                             <h3 className="text-3xl font-din text-black mb-1">¥500,000</h3>
-                             <p className="text-xs text-black/50">Critical Illness Claim<br/>Approved in 2.4s</p>
+                             <h3 className="text-5xl font-din text-black mb-2">¥500k</h3>
+                             <p className="text-xs text-black/40 leading-relaxed">Critical Illness Claim<br/>Approved by AI Node SH-01</p>
                           </div>
                        </div>
 
-                       <div className="bg-blue-600/5 p-6 rounded-2xl border border-blue-100 flex flex-col justify-between group hover:border-blue-300 transition-colors">
+                       <div className="bg-trust-blue p-10 rounded-3xl flex flex-col justify-between text-white shadow-xl shadow-blue-900/10 hover:scale-[1.02] transition-transform duration-700">
                           <div className="flex justify-between items-start">
-                             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                             <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                              </div>
-                             <span className="text-[9px] font-mono text-blue-800/50">AVG_TIME</span>
+                             <span className="text-[10px] font-mono text-white/40 tracking-tighter uppercase">AVG_TIME</span>
                           </div>
                           <div>
-                             <h3 className="text-3xl font-din text-blue-900 mb-1">0.8s</h3>
-                             <p className="text-xs text-blue-800/60">Global Payout Velocity<br/>AI Automated</p>
+                             <h3 className="text-5xl font-din text-white mb-2">0.8s</h3>
+                             <p className="text-xs text-white/40 leading-relaxed">Global Payout Velocity<br/>Real-time Settlement Hub</p>
                           </div>
                        </div>
 
-                       <div className="col-span-2 bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-black/5 flex items-center justify-between">
-                          <div>
-                             <h4 className="text-sm font-medium text-black mb-1">Global Risk Map</h4>
-                             <p className="text-xs text-black/40">Real-time monitoring of 240+ regions</p>
+                       <div className="col-span-2 bg-black/[0.02] p-10 rounded-3xl border border-black/5 flex items-center justify-between group overflow-hidden relative">
+                          <div className="scan-line" />
+                          <div className="relative z-10">
+                             <h4 className="text-lg font-medium text-black mb-2">Global Risk Map</h4>
+                             <p className="text-xs text-black/40">Real-time monitoring of 240+ global nodes</p>
                           </div>
-                          <div className="flex gap-2">
-                             {[1,2,3,4,5].map(i => (
-                                <div key={i} className="w-1 h-8 bg-black/5 rounded-full" style={{ height: 16 + (i * 4) % 24 }} />
+                          <div className="flex gap-3 relative z-10">
+                             {[1,2,3,4,5,6,7,8].map(i => (
+                                <div key={i} className="w-1.5 h-12 bg-trust-blue/10 rounded-full flex flex-col justify-end">
+                                   <div className="bg-trust-blue rounded-full" style={{ height: `${20 + (i * 15) % 80}%` }} />
+                                </div>
                              ))}
                           </div>
                        </div>
@@ -489,31 +522,25 @@ const Pulse = () => {
                </div>
             </div>
 
-           {/* Round 7: Micro-Verification Logs */}
-            <div className="mt-40 border-t border-black/5 pt-12">
-               <div className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-6">
+            {/* Round 7: Micro-Verification Logs */}
+            <div className="mt-40 border-t border-black/5 pt-16">
+               <div className="max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                   {[
                     { id: '0XFE4', status: 'VERIFIED', node: 'TOKYO_01', type: 'MEDICAL' },
                     { id: '0XA12', status: 'EXECUTING', node: 'LONDON_HUD', type: 'LIFE' },
                     { id: '0X5B9', status: 'VERIFIED', node: 'SHANGHAI_A1', type: 'WEALTH' },
                     { id: '0X9D0', status: 'VERIFIED', node: 'NYC_CENTRAL', type: 'TRAVEL' }
                   ].map((log, i) => (
-                    <div key={i} className="verification-log group">
-                       <span className="text-[9px] font-mono text-black/40">[{log.id}]</span>
-                       <span className="text-[11px] text-black flex-1 tracking-[0.2em] font-medium">{log.node}</span>
+                    <div key={i} className="flex flex-col gap-3 group border-r border-black/5 last:border-none pr-8">
+                       <span className="text-[10px] font-mono text-black/20">LOG_REF_{log.id}</span>
+                       <span className="text-sm text-black tracking-widest font-medium group-hover:text-trust-blue transition-colors">{log.node}</span>
                        <div className="flex items-center gap-3">
-                          <div className={`w-1.5 h-1.5 rounded-full ${log.status === 'VERIFIED' ? 'bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.4)]' : 'bg-gold animate-pulse'}`} />
-                          <span className={`${log.status === 'VERIFIED' ? 'text-black/60' : 'text-gold'} text-[9px] font-mono font-bold tracking-tighter`}>{log.status}</span>
+                          <div className={`w-2 h-2 rounded-full ${log.status === 'VERIFIED' ? 'bg-jade shadow-[0_0_12px_rgba(0,166,126,0.3)]' : 'bg-trust-blue animate-pulse'}`} />
+                          <span className={`text-[10px] font-mono font-bold ${log.status === 'VERIFIED' ? 'text-black/40' : 'text-trust-blue'}`}>{log.status}</span>
                        </div>
                     </div>
                   ))}
                </div>
-            </div>
-
-            <div className="mt-20 text-center md:text-left">
-               <p className="text-[12px] text-black/30 tracking-[1em] uppercase italic font-extralight py-10 opacity-60">
-                 “数据是理性的，但它守护的生活是感性的。”
-               </p>
             </div>
         </div>
      </section>
@@ -522,79 +549,90 @@ const Pulse = () => {
 
 const Product = () => {
   return (
-    <section id="product" className="relative min-h-screen bg-white flex flex-col items-center justify-center py-[spacing-section]">
-       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,84,166,0.05)_0%,transparent_70%)]" />
-       </div>
+    <section id="product" className="relative min-h-screen bg-white flex items-center justify-center py-[spacing-section] overflow-hidden">
+       {/* Background decorative elements */}
+       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_10%,rgba(0,84,166,0.03)_0%,transparent_50%)]" />
 
-       <div className="container mx-auto px-12 md:px-24 z-10">
-          <div className="asymmetric-layout mb-32">
-             <div className="col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-                <span className="text-blue-600 text-xs tracking-[1.5em] uppercase block mb-10 opacity-60">System Architecture / 04</span>
-                <h2 className="text-7xl md:text-8xl font-extralight tracking-tighter leading-none text-black">
+       <div className="container mx-auto px-12 md:px-24 z-10 w-full">
+          <div className="asymmetric-layout mb-40">
+             <div className="col-span-12 lg:col-span-10 lg:col-start-2 text-center">
+                <span className="pulse-label">System Architecture / 04</span>
+                <h2 className="section-title text-black">
                    生命建筑系统<br />
-                   <span className="text-black/20 italic text-5xl md:text-7xl">Architecture HUD</span>
+                   <span className="text-black/10 italic text-5xl md:text-[6rem]">Architecture HUD</span>
                 </h2>
              </div>
           </div>
           
           {/* Static Blueprint Card - Replacing 3D Canvas */}
-          <div className="relative w-full max-w-4xl mx-auto h-[600px] border border-black/5 bg-[#F9FAFB] rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-700 group">
+          <div className="relative w-full max-w-6xl mx-auto aspect-[16/9] border border-black/5 bg-[#F9FAFB] rounded-[3rem] overflow-hidden hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-1000 group">
+             {/* Blueprint HUD Lines */}
+             <div className="absolute top-1/4 left-0 w-full h-[1px] bg-trust-blue/5 z-20" />
+             <div className="absolute top-3/4 left-0 w-full h-[1px] bg-trust-blue/5 z-20" />
+             <div className="absolute left-1/4 top-0 w-[1px] h-full bg-trust-blue/5 z-20" />
+             <div className="absolute left-3/4 top-0 w-[1px] h-full bg-trust-blue/5 z-20" />
+             
+             {/* Scanning Line */}
+             <div className="scan-line" />
+
              {/* Blueprint Grid Background */}
-             <div className="absolute inset-0 z-0 opacity-10" 
-                  style={{ backgroundImage: 'linear-gradient(#0054A6 1px, transparent 1px), linear-gradient(90deg, #0054A6 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+             <div className="absolute inset-0 z-0 opacity-[0.05]" 
+                  style={{ backgroundImage: 'linear-gradient(#0054A6 1px, transparent 1px), linear-gradient(90deg, #0054A6 1px, transparent 1px)', backgroundSize: '60px 60px' }} 
              />
              
              {/* Realistic Blueprint Image */}
-             <div className="absolute inset-0 z-10 flex items-center justify-center p-20">
+             <div className="absolute inset-0 z-10 flex items-center justify-center p-24">
                  <img 
                    src="/blueprint_house.png" 
                    alt="Architectural Blueprint" 
-                   className="w-full h-full object-contain opacity-90 mix-blend-multiply filter contrast-125 transition-transform duration-1000 group-hover:scale-105"
+                   className="w-full h-full object-contain opacity-80 mix-blend-multiply filter contrast-[1.1] brightness-[0.98] transition-transform duration-[2s] group-hover:scale-105"
                  />
              </div>
 
              {/* Content Overlay */}
-             <div className="relative z-20 h-full flex flex-col justify-between p-12 pointer-events-none">
+             <div className="relative z-30 h-full flex flex-col justify-between p-16 pointer-events-none">
                 <div className="flex justify-between items-start">
-                   <div className="flex gap-4 items-center">
-                      <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                      <span className="text-[10px] font-mono text-blue-900/40 uppercase tracking-widest">Blueprint_View_2.0</span>
+                   <div className="flex gap-6 items-center">
+                      <div className="w-3 h-3 rounded-full bg-trust-blue animate-pulse" />
+                      <div className="flex flex-col">
+                        <span className="text-[12px] font-mono text-trust-blue uppercase tracking-[0.4em] font-bold">Blueprint_View_4.0</span>
+                        <span className="text-[9px] font-mono text-black/20 uppercase tracking-widest mt-1">Ref_System_Integrity_Verified</span>
+                      </div>
                    </div>
                    <div className="text-right pointer-events-auto">
-                      <h3 className="text-2xl font-serif text-black mb-1">稳固架构</h3>
-                      <p className="text-[10px] text-black/40 uppercase tracking-widest">Solid Structure</p>
+                      <h3 className="text-4xl font-serif text-black mb-2">稳固架构</h3>
+                      <p className="text-[12px] text-black/40 uppercase tracking-[0.6em] font-mono">Solid Structure Protocol</p>
                    </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-8 pointer-events-auto">
+                <div className="grid grid-cols-3 gap-16 pointer-events-auto max-w-4xl">
                    {[
-                      { title: 'Foundation', cn: '地基', desc: '全球顶尖医疗资源网络覆盖' },
-                      { title: 'Pillars', cn: '支柱', desc: '千万级保额提供强力支撑' },
-                      { title: 'Roof', cn: '屋顶', desc: '家族财富传承与税务筹划' }
+                      { title: 'Foundation', cn: '生命地基', desc: '覆盖全球 240+ 顶级医疗资源网络，确保资产底层稳健。' },
+                      { title: 'Pillars', cn: '保障支柱', desc: '千万级保额提供强力金融支撑，抵御无法预见的风险波动。' },
+                      { title: 'Roof', cn: '财富屋顶', desc: '通过跨代财富传承协议与税务筹划，构建永久资产掩体。' }
                    ].map((item, i) => (
                       <div key={i} className="group/item cursor-pointer">
-                         <div className="w-8 h-[1px] bg-blue-600 mb-4 group-hover/item:w-16 transition-all duration-500" />
-                         <h4 className="text-lg font-serif text-black mb-1">{item.cn}</h4>
-                         <p className="text-[10px] text-blue-900/50 uppercase tracking-widest mb-3">{item.title}</p>
-                         <p className="text-xs text-black/40 leading-relaxed max-w-[180px]">{item.desc}</p>
+                         <div className="w-12 h-[2px] bg-trust-blue mb-6 group-hover/item:w-20 transition-all duration-700" />
+                         <h4 className="text-2xl font-serif text-black mb-2">{item.cn}</h4>
+                         <p className="text-[11px] text-trust-blue/40 uppercase tracking-[0.4em] mb-4 font-mono">{item.title}</p>
+                         <p className="text-sm text-black/40 leading-relaxed font-extralight">{item.desc}</p>
                       </div>
                    ))}
                 </div>
 
-                <div className="flex justify-between items-end border-t border-blue-900/10 pt-8 pointer-events-auto">
-                   <div className="flex gap-8">
-                      <div>
-                         <span className="block text-[32px] font-din text-black leading-none">99.9%</span>
-                         <span className="text-[9px] text-black/30 tracking-widest uppercase">Safety Rating</span>
+                <div className="flex justify-between items-end border-t border-black/5 pt-12 pointer-events-auto">
+                   <div className="flex gap-16">
+                      <div className="flex flex-col">
+                         <span className="text-4xl font-din text-black leading-none mb-2">99.9%</span>
+                         <span className="text-[10px] text-black/30 tracking-[0.4em] uppercase font-mono">Safety Rating</span>
                       </div>
-                      <div>
-                         <span className="block text-[32px] font-din text-black leading-none">AAA</span>
-                         <span className="text-[9px] text-black/30 tracking-widest uppercase">Credit Level</span>
+                      <div className="flex flex-col">
+                         <span className="text-4xl font-din text-black leading-none mb-2">AAA</span>
+                         <span className="text-[10px] text-black/30 tracking-[0.4em] uppercase font-mono">Credit Level</span>
                       </div>
                    </div>
-                   <button className="px-8 py-3 bg-black text-white text-xs tracking-widest uppercase hover:bg-blue-900 transition-colors">
-                      Download Kit
+                   <button className="cta-vermilion">
+                      Download Blueprint Kit
                    </button>
                 </div>
              </div>
@@ -613,84 +651,70 @@ const Product = () => {
 
 const Ecosystem = () => {
   return (
-    <section className="ecosystem-section bg-[#F0F2F5]">
-       <div className="container mx-auto px-12 md:px-24 relative z-20">
-          <div className="asymmetric-layout">
-              <div className="col-span-12 lg:col-span-7 mb-40">
-                <div className="flex items-center gap-4 mb-8">
-                   <div className="w-8 h-[2px] bg-vermilion" />
-                   <span className="text-gold text-xs tracking-[1em] uppercase opacity-60">Service Protocol 0x4F</span>
-                </div>
-                <h2 className="text-7xl md:text-8xl font-extralight mb-16 leading-[1.0] tracking-tighter text-black">生命<br /><span className="text-black/30 italic">的防御协奏</span></h2>
-                <p className="text-black/60 text-lg leading-relaxed font-extralight tracking-wide max-w-2xl">
-                   正如 `baoxian.com` 定义了效率，我们定义了 **“尊严”**。保险不仅是支付手段，更是生命系统的防御协奏。从投保到理赔，这是一场跨越时间的信任兑付。
+    <section id="ecosystem" className="relative bg-[#FBFBFD] py-48 overflow-hidden">
+       {/* Background structural lines */}
+       <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+          <div className="blueprint-hud-line w-full top-1/2" />
+          <div className="blueprint-hud-line h-full left-1/2 w-[1px]" />
+       </div>
+
+       <div className="container mx-auto px-12 md:px-24 relative z-10">
+          <div className="asymmetric-layout mb-32">
+             <div className="col-span-12 lg:col-span-6">
+                <span className="pulse-label">Service Infrastructure / 05</span>
+                <h2 className="section-title text-black">
+                   全域<span className="italic text-black/20 ml-6">守护矩阵</span>
+                </h2>
+             </div>
+             <div className="col-span-12 lg:col-span-5 lg:col-start-8 flex items-end pb-8">
+                <p className="text-xl text-black/40 font-extralight leading-loose">
+                   从 AI 实时预警到 24/7 全球医疗资源，我们构建的不仅是保险，而是全生命周期的风险对冲矩阵。
                 </p>
              </div>
           </div>
 
-          <div className="gold-thread" />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-24 relative">
-             {/* Node 1: Pre-check */}
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ duration: 1 }}
-               className="timeline-node"
-             >
-                <div className="node-pulse" />
-                <div className="radar-scanner mb-10 border-black/10">
-                   <div className="radar-line bg-black/40" />
-                </div>
-                <h4 className="text-xl font-serif mb-4 text-black">智能核保雷达</h4>
-                <p className="text-[12px] text-black/30 leading-relaxed text-center font-light uppercase tracking-widest">
-                   AI 辅助排查 2000+ 种疾病隐患，<br />
-                   大董挑食材，我们挑条款。
-                </p>
-             </motion.div>
-
-             {/* Node 2: In-force */}
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ duration: 1, delay: 0.2 }}
-               className="timeline-node"
-             >
-                <div className="node-pulse" />
-                <div className="flex items-center mb-10 h-24">
-                   <div className="doctor-light animate-pulse" />
-                   <span className="text-gold font-mono text-xs uppercase tracking-[0.3em]">Doctor Live</span>
-                </div>
-                <h4 className="text-xl font-serif mb-4 text-black">24/7 视频医生</h4>
-                <p className="text-[12px] text-black/30 leading-relaxed text-center font-light uppercase tracking-widest">
-                   小病不排队，大病有绿通。<br />
-                   连接全国 Top 30 三甲医院资源。
-                </p>
-             </motion.div>
-
-             {/* Node 3: Claim */}
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ duration: 1, delay: 0.4 }}
-               className="timeline-node"
-             >
-                <div className="node-pulse" />
-                <div className="h-24 flex items-center mb-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">
-                   <img src="/agent_profile.png" alt="Claim Agent" className="w-16 h-16 rounded-full border border-black/10 p-1" />
-                </div>
-                <h4 className="text-xl font-serif mb-4 text-black">理赔协奏曲</h4>
-                <p className="text-[12px] text-black/30 leading-relaxed text-center font-light uppercase tracking-widest">
-                   从资料收集到法律博弈，<br />
-                   我们不仅陪伴，更能为您而战。
-                </p>
-             </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+             {[
+                { 
+                  title: 'AI 风险雷达', 
+                  en: 'AI Risk Radar', 
+                  desc: '集成 140 个风险维度的实时监测，在危害发生的前置 24 小时发出避险指令。',
+                  icon: <div className="radar-scanner"><div className="radar-line" /></div>
+                },
+                { 
+                  title: '全球医疗节点', 
+                  en: 'Global Medical Node', 
+                  desc: '直连梅奥、约翰霍普金斯等全球顶尖医疗机构，确保在黄金时间内获取救治方案。',
+                  icon: <div className="w-24 h-24 rounded-full bg-trust-blue/5 border border-trust-blue/10 flex items-center justify-center text-trust-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  </div>
+                },
+                { 
+                  title: '智能理赔中枢', 
+                  en: 'Claims Execution Hub', 
+                  desc: '基于自研“朱砂”加密协议，实现全自动化的证据链闭环，确保理赔即刻到账。',
+                  icon: <div className="w-24 h-24 rounded-full bg-black flex items-center justify-center text-white shadow-2xl">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  </div>
+                }
+             ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 1 }}
+                  className="group flex flex-col p-12 glass-card rounded-[2rem]"
+                >
+                   <div className="mb-10 transition-transform duration-700 group-hover:scale-110">
+                      {item.icon}
+                   </div>
+                   <h3 className="text-3xl font-serif text-black mb-3">{item.title}</h3>
+                   <span className="text-[10px] text-trust-blue uppercase tracking-[0.4em] mb-8 block font-mono font-bold opacity-40">{item.en}</span>
+                   <p className="text-black/40 text-lg font-extralight leading-relaxed">{item.desc}</p>
+                </motion.div>
+             ))}
           </div>
        </div>
-
-       {/* Floating Background Glows */}
-       <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
-       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
     </section>
   )
 }

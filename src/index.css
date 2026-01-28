@@ -1,372 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600&family=Inter:wght@200;300;400;500;600&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600&family=Inter:wght@200;300;400;500;600&family=Roboto+Mono&family=JetBrains+Mono&display=swap');
 
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #1A222E;
-  --color-gold: #D4AF37;
-  --color-vermilion: #E63946;
-  --color-alabaster: #F7F8FA;
-  --font-serif: 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'Roboto Mono', monospace;
+:root {
+  --font-serif: "Noto Serif SC", serif;
+  --font-sans: "Inter", "SF Pro Display", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Roboto Mono", monospace;
   --font-din: 'DIN Alternate', 'DIN Condensed', 'Inter', sans-serif;
+  
+  --color-jade: #00A67E;
+  --color-gold: #D4AF37;
+  --color-vermilion: #E63E31;
+  --color-trust-blue: #0054A6;
+  
+  --bg-deep: #FBFBFD;
+  --spacing-section: 160px;
+  --transition-ultra: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
-:root {
-  --bg-deep: #F7F8FA; 
-  --bg-pure: #FFFFFF;
-  --text-main: #0D1219;
-  --text-muted: #5A6069; /* Deeper gray for better contrast */
-  --alabaster: #F7F8FA;
-  --gold: #C5A059; /* More saturated gold for legibility */
-  --vermilion: #E63946;
-  --jade: #008F68; /* Deeper Jade */
-  --gold-muted: rgba(197, 160, 89, 0.4);
-  --glass-blur: blur(40px);
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --transition-ultra: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --spacing-section: 240px;
+@theme {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-gold: var(--color-gold);
+  --color-trust-blue: var(--color-trust-blue);
 }
 
 @layer base {
   body {
-    @apply bg-[var(--bg-deep)] text-[var(--text-main)] antialiased overflow-x-hidden;
+    @apply bg-[#FBFBFD] text-black antialiased overflow-x-hidden;
     font-family: var(--font-sans);
-    font-size: 18px;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
+    /* Micro-texture background */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-serif);
-    font-weight: 200;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-
-  /* Cinematic Grain */
-  body::before {
-    content: "";
-    @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.04];
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Global Ambient Glow & Global Spine (Round 9) */
-  body::after {
-    content: "";
-    @apply fixed inset-0 pointer-events-none z-[-1];
-    background: 
-      radial-gradient(circle at 20% 20%, rgba(0, 166, 118, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 v60 M0 30 h60' fill='none' stroke='black' stroke-width='0.5' stroke-opacity='0.02'/%3E%3C/svg%3E");
-    background-size: 100% 100%, 100% 100%, 60px 60px;
+  h1, h2, h3, h4 {
+    @apply font-serif font-extralight tracking-tighter;
   }
 }
 
 @layer components {
-  /* The Cockpit HUD */
+  /* Layout Utils */
+  .asymmetric-layout {
+    @apply grid grid-cols-12 gap-x-8;
+  }
+
+  /* Typography System Upgrade */
+  .hero-headline {
+    @apply text-[clamp(4rem,8vw,10rem)] leading-[0.85] tracking-[-0.05em] font-extralight;
+  }
+
+  .section-title {
+    @apply text-[clamp(3.5rem,6vw,8rem)] leading-none tracking-tighter font-extralight mb-16;
+  }
+
+  /* Materiality & Effects */
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-2xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.02)];
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    @apply shadow-[0_20px_60px_rgba(0,84,166,0.08)] border-white/60 -translate-y-1;
+  }
+
+  .blueprint-hud-line {
+    @apply absolute h-[1px] bg-trust-blue/10 pointer-events-none;
+    box-shadow: 0 0 15px rgba(0, 84, 166, 0.1);
+  }
+
+  .scan-line {
+    @apply absolute left-0 w-full h-32 bg-gradient-to-b from-transparent via-trust-blue/5 to-transparent z-10 pointer-events-none;
+    animation: scan 6s linear infinite;
+  }
+
+  @keyframes scan {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(600px); }
+  }
+
+  /* Pulse Numbers & Stats */
+  .pulse-number {
+    @apply text-[clamp(60px,10vw,120px)] font-bold leading-none tracking-tighter;
+    font-family: var(--font-din);
+  }
+
+  .pulse-unit {
+    @apply text-2xl font-light opacity-30 ml-2;
+  }
+
+  .pulse-label {
+    @apply text-[10px] uppercase tracking-[0.4em] font-mono text-black/40 mb-4 block;
+  }
+
+  /* Buttons */
+  .cta-vermilion {
+    @apply px-12 py-6 bg-trust-blue text-white text-[12px] uppercase tracking-[0.6em] font-semibold transition-all duration-700 relative overflow-hidden;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
+
+  .cta-vermilion:hover {
+    @apply brightness-110 -translate-y-0.5;
+    box-shadow: 0 20px 40px rgba(0, 84, 166, 0.2);
+  }
+
+  .ghost-button {
+    @apply px-8 py-3 bg-transparent border border-black/10 text-[10px] uppercase tracking-[0.4em] text-black/40 hover:text-black hover:border-black/40 transition-all duration-500;
+  }
+
+  /* Navigation & HUD */
   .cockpit-capsule {
     @apply fixed left-1/2 -translate-x-1/2 flex items-center justify-between px-10 z-[100];
     transition: var(--transition-ultra);
     width: calc(100% - 80px);
     max-width: 1400px;
-    height: 64px;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    border-radius: 32px;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
-    top: 20px;
+    height: 72px;
+    background: white;
+    border-radius: 36px;
+    border: 1px solid rgba(0, 84, 166, 0.05);
+    box-shadow: 0 40px 100px rgba(0, 84, 166, 0.05);
+    top: 24px;
   }
 
-  /* SOS Pulsing Button */
-  .sos-button {
-    @apply relative flex items-center justify-center w-3 h-3 rounded-full bg-[#E63946];
-    box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
+  .spotlight-input {
+    @apply w-full max-w-[400px] bg-transparent border-none text-[12px] font-mono tracking-widest text-black/60 outline-none pr-4;
   }
 
-  .sos-button::after {
-    content: '';
-    @apply absolute inset-0 rounded-full bg-[#E63946] opacity-0;
-    animation: sos-pulse 2s infinite ease-out;
-  }
-
-  @keyframes sos-pulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(4); opacity: 0; }
-  }
-
-  /* Full Screen Mega Menu */
   .mega-menu {
-    @apply fixed inset-0 z-[1000] bg-[#0A101D]/95 backdrop-blur-3xl overflow-hidden;
+    @apply fixed inset-0 z-[1000] bg-white/95 backdrop-blur-3xl overflow-hidden;
   }
 
   .mega-menu-content {
-    @apply grid grid-cols-1 lg:grid-cols-[40%_60%] h-full;
+    @apply grid grid-cols-1 lg:grid-cols-2 h-full;
   }
 
   .menu-identity-link {
-    @apply block text-[clamp(40px,5vw,72px)] font-serif leading-none tracking-tighter text-white/50 hover:text-white transition-all py-6 border-b border-white/5 last:border-none;
+    @apply block text-[clamp(40px,5vw,72px)] font-serif leading-none tracking-tighter text-black/30 hover:text-black transition-all py-8 border-b border-black/5;
   }
 
-  /* Variable Logo Styles */
-  .logo-text {
-    @apply font-sans font-normal uppercase;
-    letter-spacing: 0.6em;
-  }
-
-  /* Hero Typography Redesign */
-  .hero-headline {
-    @apply text-[5vw] lg:text-[100px] leading-[0.95] tracking-[-0.05em] font-extralight text-black;
-  }
-
-  .hero-subline {
-    @apply text-xl lg:text-3xl text-black/60 font-extralight tracking-wide mt-10;
-  }
-
-  /* Asymmetric Grid Utils */
-  .asymmetric-layout {
-    @apply grid grid-cols-12 gap-x-8;
-  }
-
-  .content-col {
-    @apply col-span-12 lg:col-span-8 lg:col-start-2;
-  }
-
-  /* Section Spacing */
-  section {
-    @apply py-[200px];
-  }
-  
-  .hero-section {
-    @apply py-0;
-  }
-
-  /* Soundscape Icon */
   .soundwave-bar {
-    @apply w-[2px] bg-gold/40 transition-all duration-300;
+    @apply w-[2px] bg-black/20;
   }
 
-  /* Intelligence Grid - Inspired by Baoxian.com Mall filtering but elevated */
-  .intelligence-console {
-    @apply sticky top-24 z-30 p-8 rounded-2xl border border-black/5 bg-white/80 backdrop-blur-3xl;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.03);
-  }
-
-  .filter-chip {
-    @apply px-5 py-2.5 text-[10px] uppercase font-medium tracking-[0.2em] border border-black/5 rounded-full hover:border-gold hover:text-gold transition-all cursor-pointer text-black/30 bg-white/50;
-  }
-
-  .filter-chip.active {
-    @apply bg-black text-white border-black;
-  }
-
-  /* Round 1: Service Commitment Stamps */
-  .commitment-stamp {
-    @apply absolute -top-4 -right-4 w-12 h-12 rounded-full bg-vermilion flex items-center justify-center text-white text-[10px] font-bold shadow-lg shadow-vermilion/30 z-20;
-    animation: stamp-rotate 10s linear infinite;
-  }
-
-  @keyframes stamp-rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Round 5: HUD Floating Sidebar */
-  .hud-sidebar {
-    @apply fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-[90];
-  }
-
-  .hud-item {
-    @apply w-12 h-12 rounded-full bg-white/40 backdrop-blur-xl border border-black/5 flex items-center justify-center text-black/20 hover:text-black hover:bg-white transition-all duration-500 cursor-pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-  }
-
-  /* Data Sculpture Redesign */
-  .pulse-number {
-    @apply text-[clamp(80px,12vw,160px)] font-bold leading-[0.85] tracking-[-0.06em] text-black;
-    font-family: var(--font-din);
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.05));
-  }
-
-  .pulse-unit {
-    @apply text-[32px] font-bold align-super ml-2 opacity-40;
-  }
-
-  .jade-accent {
-    @apply text-[var(--jade)] font-mono text-[11px] font-bold tracking-widest uppercase;
-  }
-
-  /* Round 7: Micro-Verification Logs */
-  .verification-log {
-    @apply flex items-center gap-4 py-3 border-b border-black/5 opacity-60 hover:opacity-100 transition-opacity;
-  }
-
-  .pulse-desc {
-    @apply text-[18px] text-black/50 leading-loose max-w-[320px] mt-6 font-extralight;
-  }
-
-  /* Section Transition Mask */
-  .section-mask-top {
-    @apply absolute top-0 left-0 w-full h-[200px] z-10 pointer-events-none;
-    background: linear-gradient(to bottom, rgba(0, 84, 166, 0.08), transparent);
-  }
-
-  /* Real-time Claim Feeds */
-  .claim-feed {
-    @apply absolute p-4 bg-white/40 backdrop-blur-md border border-white/20 rounded-lg shadow-xl pointer-events-none transition-all duration-700;
-  }
-
-  .claim-line {
-    @apply w-[100px] h-[0.5px] bg-black/10 origin-left;
-  }
-
-  /* Section 3: The Glass House (Blueprint) */
-  .blueprint-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0,0,0,0.05);
-    @apply p-10 rounded-2xl transition-all duration-700 relative;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.03);
-  }
-
-  .blueprint-card::before {
-    content: "";
-    @apply absolute inset-0 opacity-[0.05] pointer-events-none rounded-2xl;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .cta-vermilion {
-    @apply px-12 py-6 bg-[#E63946] text-white text-[12px] uppercase tracking-[0.6em] font-semibold transition-all duration-700 shadow-2xl shadow-[#E63946]/30 overflow-hidden relative;
-    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-  }
-
-  .cta-vermilion::after {
-    content: "";
-    @apply absolute inset-0 bg-white/20 translate-x-[-100%];
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .cta-vermilion:hover::after {
-    @apply translate-x-[100%];
-  }
-
-  .cta-vermilion:hover {
-    @apply scale-105 brightness-110;
-    box-shadow: 0 20px 50px rgba(230, 57, 70, 0.5);
-  }
-
-  .ghost-button {
-    @apply px-8 py-3 bg-transparent border border-black/10 text-[10px] uppercase tracking-[0.4em] text-black/30 hover:text-black hover:border-black/40 transition-all duration-500;
-  }
-
-  /* Glass Card Utility */
-  .glass-card {
-    @apply bg-[#F7F8FA]/80 backdrop-blur-2xl border border-white/50 shadow-[0_20px_40px_rgba(0,0,0,0.04)];
-  }
-
-  /* Section 4: The Ecosystem (Timeline) */
-  .ecosystem-section {
-    @apply relative bg-[#F7F8FA] py-48 text-black overflow-hidden;
-  }
-
-  .gold-thread {
-    @apply absolute left-0 w-full h-[0.5px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-20;
-    top: 60%;
-  }
-
-  .timeline-node {
-    @apply relative flex flex-col items-center z-10;
-  }
-
-  .node-pulse {
-    @apply w-4 h-4 rounded-full bg-gold relative mb-8;
-    box-shadow: 0 0 20px var(--gold);
-  }
-
-  .node-pulse::after {
-    content: '';
-    @apply absolute inset-0 rounded-full bg-gold;
-    animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  @keyframes ping {
-    75%, 100% {
-      transform: scale(3.5);
-      opacity: 0;
-    }
-  }
-
-  .radar-scanner {
-    @apply w-24 h-24 border border-gold/20 rounded-full relative overflow-hidden;
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1), transparent);
-  }
-
-  .radar-line {
-    @apply absolute top-1/2 left-1/2 w-full h-[1px] bg-gold/40 origin-left;
-    animation: radar-spin 4s linear infinite;
-  }
-
-  @keyframes radar-spin {
-    from { transform: rotate(0deg) translate(-50%, -50%) scaleX(0.5); }
-    to { transform: rotate(360deg) translate(-50%, -50%) scaleX(0.5); }
-  }
-
-  .doctor-light {
-    @apply w-1.5 h-1.5 rounded-full bg-green-500 mr-2;
-    box-shadow: 0 0 10px #22c55e;
-  }
-
-  /* --- Mobile Optimization --- */
-  @media (max-width: 768px) {
-    .hero-headline { @apply text-[42px]; }
-    .pulse-number { @apply text-[56px]; }
-    .cockpit-capsule { @apply w-[95%] h-[56px]; }
-    .blueprint-card { @apply min-w-full p-6; }
-    .container { @apply px-6; }
-    .product-canvas { @apply h-[400px]; }
-  }
-
-  /* --- Footer: The Brand Footnote --- */
-  .footer-meta-label {
-    @apply text-[9px] text-white/20 tracking-[0.3em] uppercase mb-1 block;
-  }
-
-  .footer-meta-value {
-    @apply text-[10px] text-white/60 font-mono uppercase tracking-widest;
-  }
-
-  .footer-link {
-    @apply text-[10px] text-white/40 hover:text-gold tracking-[0.4em] uppercase transition-all duration-300;
+  .scroll-hint-line {
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-t from-gold/40 to-transparent;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.2);
+  background: rgba(0, 84, 166, 0.1);
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
+  background: var(--color-trust-blue);
 }
-
-.animate-fade-up {
-  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.mask-gradient-top {
-  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-}
-
