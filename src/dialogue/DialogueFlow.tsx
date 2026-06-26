@@ -2,6 +2,9 @@ import { useState, useCallback, type ReactNode } from 'react'
 import type { FamilyProfile } from '../engine/types'
 import { ACT_ORDER, EMPTY_PROFILE, type ActId, type DialogueState } from './types'
 import { saveProfile } from '../report/persistence'
+import OpeningAct from './acts/OpeningAct'
+import FamilyAct from './acts/FamilyAct'
+import CalcAct from './acts/CalcAct'
 
 interface ActProps {
   profile: Partial<FamilyProfile>
@@ -12,9 +15,9 @@ interface ActProps {
 
 // 每幕组件在后续任务接入；先用占位映射，便于本任务独立编译。
 const ACT_REGISTRY: Record<ActId, (p: ActProps) => ReactNode> = {
-  opening: ({ next }) => <button onClick={next}>开始</button>,
-  family: ({ next }) => <button onClick={next}>family →</button>,
-  calc: ({ next }) => <button onClick={next}>calc →</button>,
+  opening: (p) => <OpeningAct {...p} />,
+  family: (p) => <FamilyAct {...p} />,
+  calc: (p) => <CalcAct {...p} />,
   reveal: ({ next }) => <button onClick={next}>reveal →</button>,
   solution: ({ next }) => <button onClick={next}>solution →</button>,
   takeaway: () => <div>takeaway</div>,
