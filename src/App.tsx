@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, AnimatePresence } from 'framer-motion'
+import DialogueFlow from './dialogue/DialogueFlow'
+import { decodeProfile } from './report/persistence'
 
 // --- Utilities ---
 
@@ -240,7 +242,7 @@ const Header = () => {
   )
 }
 
-const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveStage: (s: string) => void }) => {
+const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, setActiveStage: (s: string) => void, onStart: () => void }) => {
   const [isSoundOn, setIsSoundOn] = useState(false)
   const [activePlaceholder, setActivePlaceholder] = useState("唤醒 AI 风险规划师...")
   const [inputValue, setInputValue] = useState("")
@@ -368,7 +370,7 @@ const Hero = ({ activeStage, setActiveStage }: { activeStage: string, setActiveS
                             />
                          </div>
                          
-                         <button className="flex items-center justify-center gap-3 px-6 lg:px-10 py-4 lg:py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 group/btn hover:-translate-y-0.5 mt-4 md:mt-0">
+                         <button onClick={onStart} className="flex items-center justify-center gap-3 px-6 lg:px-10 py-4 lg:py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 group/btn hover:-translate-y-0.5 mt-4 md:mt-0">
                             <span className="text-xs lg:text-sm tracking-[0.2em] font-medium uppercase whitespace-nowrap">Activate // 启动</span>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="flex-shrink-0 opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
                          </button>
@@ -839,12 +841,25 @@ const Footer = () => {
 
 export default function App() {
   const [activeStage, setActiveStage] = useState('Founders')
+  const [view, setView] = useState<'brand' | 'dialogue'>(() => {
+    const p = new URLSearchParams(location.search).get('p')
+    return p && decodeProfile(p) ? 'dialogue' : 'brand'
+  })
+
+  const initialProfile = (() => {
+    const p = new URLSearchParams(location.search).get('p')
+    return p ? decodeProfile(p) ?? undefined : undefined
+  })()
+
+  if (view === 'dialogue') {
+    return <DialogueFlow initialProfile={initialProfile} />
+  }
 
   return (
     <div className="bg-[#F7F8FA] selection:bg-gold selection:text-black">
       <Header />
-      
-      <Hero activeStage={activeStage} setActiveStage={setActiveStage} />
+
+      <Hero activeStage={activeStage} setActiveStage={setActiveStage} onStart={() => setView('dialogue')} />
       <Pulse />
       <Product />
       <Ecosystem />
