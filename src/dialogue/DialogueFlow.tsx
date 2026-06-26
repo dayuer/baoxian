@@ -7,6 +7,7 @@ import FamilyAct from './acts/FamilyAct'
 import CalcAct from './acts/CalcAct'
 import RevealAct from './acts/RevealAct'
 import SolutionAct from './acts/SolutionAct'
+import TakeawayAct from './acts/TakeawayAct'
 
 interface ActProps {
   profile: Partial<FamilyProfile>
@@ -22,7 +23,7 @@ const ACT_REGISTRY: Record<ActId, (p: ActProps) => ReactNode> = {
   calc: (p) => <CalcAct {...p} />,
   reveal: (p) => <RevealAct {...p} />,
   solution: (p) => <SolutionAct {...p} />,
-  takeaway: () => <div>takeaway</div>,
+  takeaway: (p) => <TakeawayAct {...p} />,
 }
 
 export default function DialogueFlow({
