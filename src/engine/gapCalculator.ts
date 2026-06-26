@@ -25,9 +25,9 @@ export function calculateGap(profile: FamilyProfile): GapResult {
   const preparedRatio = totalNeed > 0 ? buffer / totalNeed : 1
 
   const breakdown = [
-    { label: '生活开支', value: livingNeed },
-    { label: '子女教育', value: educationNeed },
-    { label: '未偿负债', value: debt },
+     { label: '日常生活', value: livingNeed },
+     { label: '孩子教育', value: educationNeed },
+     { label: '未还贷款', value: debt },
   ]
 
   return { livingNeed, educationNeed, debt, totalNeed, buffer, gap, preparedRatio, breakdown }

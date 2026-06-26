@@ -28,17 +28,17 @@ export default function TakeawayAct({ profile, back }: ActProps) {
       <div className="flex flex-wrap gap-4 justify-center mt-10">
         {/* A: 带走报告 */}
         <button onClick={() => window.print()} className="px-6 py-3 rounded-full bg-white text-black">
-          下载这份报告
+          保存报告
         </button>
         {/* B: 我的方案空间 */}
         <button onClick={copyLink} className="px-6 py-3 rounded-full border border-white/30 hover:bg-white hover:text-black transition-colors">
-          {copied ? '链接已复制' : '保存我的方案（可回访）'}
+          {copied ? '链接已复制' : '复制链接（随时可以回来看）'}
         </button>
       </div>
 
       {/* C: 克制的门 */}
       <p className="text-center opacity-40 text-sm mt-16 leading-relaxed">
-        什么时候你准备好往下走，我都在这儿。<br />不催你。
+        什么时候准备好了，我都在。<br />不催你。
       </p>
 
       <div className="flex justify-center mt-10">
@@ -46,7 +46,7 @@ export default function TakeawayAct({ profile, back }: ActProps) {
           onClick={back}
           className="text-xs tracking-[0.2em] uppercase text-white/30 hover:text-white/70 transition-colors"
         >
-          ← 回去看方案
+          ← 回去看看方案
         </button>
       </div>
     </div>

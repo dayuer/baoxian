@@ -57,10 +57,10 @@ test('无孩子时 supportYears 为 0，livingNeed 为 0', () => {
   expect(r.educationNeed).toBe(0)
 })
 
-test('breakdown 含生活/教育/负债三项人话标签', () => {
+test('breakdown 含生活/教育/贷款三项标签', () => {
   const r = calculateGap(baseProfile)
   const labels = r.breakdown.map((b) => b.label)
-  expect(labels).toContain('生活开支')
-  expect(labels).toContain('子女教育')
-  expect(labels).toContain('未偿负债')
+  expect(labels).toContain('日常生活')
+  expect(labels).toContain('孩子教育')
+  expect(labels).toContain('未还贷款')
 })

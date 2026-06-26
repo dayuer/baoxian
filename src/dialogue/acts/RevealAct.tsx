@@ -23,13 +23,13 @@ export default function RevealAct({ profile, next, back }: ActProps) {
           onClick={next}
           className="px-8 py-3 rounded-full border border-white/30 hover:bg-white hover:text-black transition-colors"
         >
-          这个缺口，能怎么补？
+           这个缺口，有办法补上吗？
         </button>
         <button
           onClick={back}
           className="text-xs tracking-[0.2em] uppercase text-white/30 hover:text-white/70 transition-colors"
         >
-          ← 数字不对？回去改
+           ← 数字有误？回去调整
         </button>
       </motion.div>
     </div>

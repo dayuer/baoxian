@@ -10,7 +10,7 @@ export default function Report({ profile }: { profile: FamilyProfile }) {
   const pct = Math.round(r.preparedRatio * 100)
   return (
     <div className="max-w-xl mx-auto bg-white text-black rounded-2xl p-8 print:shadow-none">
-      <div className="text-xs tracking-[0.3em] uppercase opacity-50">家庭保障缺口报告</div>
+      <div className="text-xs tracking-[0.3em] uppercase opacity-50">你的保障缺口</div>
       <div className="text-4xl font-light text-[#c0392b] my-4 tabular-nums">{formatYuan(r.gap)}</div>
       <div className="text-sm opacity-60 mb-6">已准备 {pct}%</div>
       <div className="h-2 bg-black/10 rounded-full overflow-hidden mb-8">
@@ -23,7 +23,7 @@ export default function Report({ profile }: { profile: FamilyProfile }) {
           </div>
         ))}
         <div className="flex justify-between text-sm pt-1">
-          <span className="opacity-60">已有缓冲</span>
+          <span className="opacity-60">已有储备</span>
           <span className="tabular-nums opacity-60">- {formatYuan(r.buffer)}</span>
         </div>
       </div>
