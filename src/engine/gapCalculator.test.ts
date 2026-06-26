@@ -43,6 +43,20 @@ test('preparedRatio 反映已准备比例', () => {
   expect(r.preparedRatio).toBeCloseTo(5_000_000 / 33_400_000, 5)
 })
 
+test('无孩子时 supportYears 为 0，livingNeed 为 0', () => {
+  const r = calculateGap({
+    dependents: [{ role: 'spouse', age: 26, hasIncome: false }],
+    monthlyExpense: 100_000,
+    educationPerChildYearly: 200_000,
+    mortgageBalance: 4_000_000,
+    savings: 5_000_000,
+    residencyAbroad: true,
+    supportUntilAge: 18,
+  })
+  expect(r.livingNeed).toBe(0)
+  expect(r.educationNeed).toBe(0)
+})
+
 test('breakdown 含生活/教育/负债三项人话标签', () => {
   const r = calculateGap(baseProfile)
   const labels = r.breakdown.map((b) => b.label)

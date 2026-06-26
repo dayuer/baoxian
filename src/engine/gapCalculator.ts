@@ -6,7 +6,9 @@ export function calculateGap(profile: FamilyProfile): GapResult {
   const youngestAge = children.length
     ? Math.min(...children.map((c) => c.age))
     : 0
-  const supportYears = Math.max(profile.supportUntilAge - youngestAge, 0)
+  const supportYears = children.length
+    ? Math.max(profile.supportUntilAge - youngestAge, 0)
+    : 0
 
   const livingNeed = profile.monthlyExpense * 12 * supportYears
 
