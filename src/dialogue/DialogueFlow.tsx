@@ -5,6 +5,7 @@ import { saveProfile } from '../report/persistence'
 import OpeningAct from './acts/OpeningAct'
 import FamilyAct from './acts/FamilyAct'
 import CalcAct from './acts/CalcAct'
+import RevealAct from './acts/RevealAct'
 
 interface ActProps {
   profile: Partial<FamilyProfile>
@@ -18,7 +19,7 @@ const ACT_REGISTRY: Record<ActId, (p: ActProps) => ReactNode> = {
   opening: (p) => <OpeningAct {...p} />,
   family: (p) => <FamilyAct {...p} />,
   calc: (p) => <CalcAct {...p} />,
-  reveal: ({ next }) => <button onClick={next}>reveal →</button>,
+  reveal: (p) => <RevealAct {...p} />,
   solution: ({ next }) => <button onClick={next}>solution →</button>,
   takeaway: () => <div>takeaway</div>,
 }
