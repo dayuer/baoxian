@@ -40,7 +40,7 @@ export default function CalcAct({ profile, update, next, back }: ActProps) {
 
   return (
     <div className="max-w-2xl mx-auto px-6 pt-28 pb-20">
-      <Message from="future">如果有一天我不在了，这个家每月还要花多少钱？</Message>
+      <Message from="future">如果有一天你不在了，这个家每个月还要花多少？</Message>
       {monthly !== null && <Message from="self">{wan(monthly)} / 月</Message>}
       {step === 'monthly' && (
         <NumberInput placeholder="月开支" suffix="元/月" onSubmit={(v) => {
@@ -50,7 +50,7 @@ export default function CalcAct({ profile, update, next, back }: ActProps) {
       )}
 
       {hasChildren && (step === 'education' || (monthly !== null && step !== 'monthly')) && (
-        <Message from="future">每个孩子，一年的教育大概要花多少？没有就填 0。</Message>
+        <Message from="future">孩子的教育，一年大概多少？不确定的话填个大概就好。</Message>
       )}
       {education !== null && <Message from="self">{wan(education)} / 年 · 每个孩子</Message>}
       {step === 'education' && (
@@ -60,7 +60,7 @@ export default function CalcAct({ profile, update, next, back }: ActProps) {
       )}
 
       {(step === 'mortgage' || mortgage !== null) && (
-        <Message from="future">还背着多少房贷或负债？</Message>
+        <Message from="future">房贷、车贷，还有多少没还完的？</Message>
       )}
       {mortgage !== null && <Message from="self">{wan(mortgage)}</Message>}
       {step === 'mortgage' && (
@@ -70,7 +70,7 @@ export default function CalcAct({ profile, update, next, back }: ActProps) {
       )}
 
       {(step === 'savings' || savings !== null) && (
-        <Message from="future">现在家里的存款，大概有多少？</Message>
+        <Message from="future">手头的积蓄，大概有多少？</Message>
       )}
       {savings !== null && <Message from="self">{wan(savings)}</Message>}
       {step === 'savings' && (
@@ -81,10 +81,10 @@ export default function CalcAct({ profile, update, next, back }: ActProps) {
 
       {step === 'done' && (
         <>
-          <Message from="future">够了。让我替你，把这些数字算成一个答案……</Message>
+          <Message from="future">好。让我安静地算一下。</Message>
           <div className="flex justify-end mt-6">
             <button onClick={next} className="px-6 py-2 rounded-full bg-white text-black">
-              看结果
+              看看结果
             </button>
           </div>
         </>

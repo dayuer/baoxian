@@ -10,7 +10,7 @@ export default function OpeningAct({ next }: ActProps) {
         transition={{ duration: 1 }}
         className="text-3xl md:text-5xl font-light leading-snug max-w-2xl"
       >
-        你生活里，<br />有没有一个<span className="text-[#e05c4a]">不能倒下</span>的理由？
+        你的生活里，<br />有没有一个<span className="text-[#e05c4a]">不能倒下</span>的理由？
       </motion.h1>
       <motion.button
         initial={{ opacity: 0 }}
@@ -19,7 +19,7 @@ export default function OpeningAct({ next }: ActProps) {
         onClick={next}
         className="mt-12 px-8 py-3 rounded-full border border-white/30 hover:bg-white hover:text-black transition-colors"
       >
-        和未来的自己聊聊
+        静下来，想一想
       </motion.button>
     </div>
   )

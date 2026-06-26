@@ -31,10 +31,10 @@ const CHROME_ACTS: ActId[] = ['family', 'calc', 'solution', 'takeaway']
 // 进度标签：六幕里有意义的推进节点。
 const PROGRESS_LABEL: Record<ActId, string> = {
   opening: '',
-  family: '你的家',
-  calc: '算一算',
+  family: '家人',
+  calc: '数字',
   reveal: '',
-  solution: '怎么办',
+  solution: '方案',
   takeaway: '带走',
 }
 

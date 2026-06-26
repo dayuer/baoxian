@@ -54,7 +54,7 @@ export default function FamilyAct({ profile, update, next, back }: ActProps) {
 
   return (
     <div className="max-w-2xl mx-auto px-6 pt-28 pb-20">
-      <Message from="future">先别急着算钱。我想知道，谁在依靠着你？</Message>
+      <Message from="future">先不聊钱。我想知道——谁在等你回家？</Message>
 
       {step === 'hasSpouse' && (
         <ChoiceInput
@@ -128,8 +128,8 @@ export default function FamilyAct({ profile, update, next, back }: ActProps) {
           <Message from="self">{abroad ? '长期境外' : '住在国内'}</Message>
           <Message from="future">
             {dependentCount > 0
-              ? `记住了。${dependentCount} 个人，正等着你撑起这片天。`
-              : '记住了。这一程，先把你自己稳稳兜住。'}
+              ? `${dependentCount} 个人。他们的确定，来自于你。`
+              : '好。那就先把你自己照顾好。'}
           </Message>
           <div className="flex justify-end mt-6">
             <button onClick={next} className="px-6 py-2 rounded-full bg-white text-black">

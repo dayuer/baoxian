@@ -54,14 +54,11 @@ const VariableLogo = () => {
         </svg>
       </div>
       <div className="flex flex-col logo-text">
-        <div className="flex items-center font-light text-black">
-           <span>B</span>
-           <span className="inline-block -mt-1 scale-y-90">ʌ</span>
-           <span>O X I</span>
-           <span className="inline-block -mt-1 scale-y-90">ʌ</span>
-           <span>N</span>
+        <div className="flex items-center font-light text-black text-xl tracking-[0.3em]">
+           <span>保</span>
+           <span>险</span>
         </div>
-        <span className="text-[9px] text-black tracking-[0.4em] -mt-1">EST. 2026 / GLOBAL PROTECTION</span>
+        <span className="text-[9px] text-black tracking-[0.4em] -mt-1">二〇二六创立 / 全球守护</span>
       </div>
     </div>
   )
@@ -99,8 +96,8 @@ const MegaMenu = ({ isOpen, onClose, onStart }: { isOpen: boolean, onClose: () =
             {/* Right: Identity Links */}
             <div className="flex flex-col justify-center px-12 lg:px-24 bg-white">
                <div className="flex justify-between items-center mb-20">
-                  <span className="text-gold text-[10px] tracking-[0.6em] uppercase">Identity Selection / 身份识别</span>
-                  <button onClick={onClose} className="text-black/40 hover:text-black transition-colors uppercase text-[10px] tracking-widest">Close / 关闭</button>
+                  <span className="text-gold text-[10px] tracking-[0.6em]">选择你的身份</span>
+                  <button onClick={onClose} className="text-black/40 hover:text-black transition-colors text-[10px] tracking-widest">关闭</button>
                </div>
                               <div className="flex flex-col gap-4 lg:gap-6">
                    {[
@@ -122,7 +119,7 @@ const MegaMenu = ({ isOpen, onClose, onStart }: { isOpen: boolean, onClose: () =
                               <span className="text-gold text-lg lg:text-xl font-mono tracking-tighter w-12">/ 0{i+1}</span>
                               <div className="flex flex-col relative whitespace-nowrap">
                                  <span className="text-4xl lg:text-[7rem] font-serif font-extralight text-black tracking-tight group-hover:italic transition-all duration-700">
-                                    {item.id}
+                                    {item.zh}者
                                  </span>
                                  {/* Layered Chinese Text */}
                                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl lg:text-[12rem] font-serif font-extralight text-black/[0.03] pointer-events-none select-none transition-all duration-[2s] group-hover:scale-110 group-hover:text-gold/5">
@@ -139,9 +136,9 @@ const MegaMenu = ({ isOpen, onClose, onStart }: { isOpen: boolean, onClose: () =
                 </div>
 
                <div className="mt-20 flex gap-8">
-                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest uppercase transition-colors">Career / 事业</a>
-                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest uppercase transition-colors">Press / 媒体</a>
-                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest uppercase transition-colors">Ethics / 伦理</a>
+                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest transition-colors">事业</a>
+                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest transition-colors">媒体</a>
+                  <a href="#" className="text-[10px] text-black/20 hover:text-black tracking-widest transition-colors">伦理</a>
                </div>
             </div>
           </div>
@@ -183,7 +180,7 @@ const Header = ({ onStart }: { onStart: () => void }) => {
 
                <div className="flex items-center gap-3">
                   <div className="sos-button" />
-                  <span className="text-[9px] text-black tracking-[0.4em] uppercase hidden md:inline">Emergency SOS</span>
+                  <span className="text-[9px] text-black tracking-[0.4em] hidden md:inline">紧急救援</span>
                </div>
                <Magnetic strength={0.4}>
                   <div 
@@ -210,17 +207,17 @@ const Header = ({ onStart }: { onStart: () => void }) => {
                    <div className="flex items-center gap-4 lg:gap-6">
                       <VariableLogo />
                       <div className="h-4 lg:h-6 w-px bg-black/10" />
-                      <div className="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-mono text-black">
-                         <a href="#pulse" className="hover:text-trust-blue transition-colors">Analysis</a>
-                         <a href="#product" className="hover:text-trust-blue transition-colors">Integrity</a>
-                         <a href="#ecosystem" className="hover:text-trust-blue transition-colors">Network</a>
-                         <button onClick={onStart} className="text-trust-blue hover:underline uppercase tracking-[0.2em]">诊断 →</button>
+                      <div className="hidden md:flex items-center gap-8 text-[12px] tracking-[0.2em] text-black">
+                         <a href="#pulse" className="hover:text-trust-blue transition-colors">实时分析</a>
+                         <a href="#product" className="hover:text-trust-blue transition-colors">系统架构</a>
+                         <a href="#ecosystem" className="hover:text-trust-blue transition-colors">守护网络</a>
+                         <button onClick={onStart} className="text-trust-blue hover:underline tracking-[0.2em]">开始诊断 →</button>
                       </div>
                    </div>
 
                   {/* Central Spotlight Search */}
                   <div className="hidden lg:flex flex-1 justify-center px-10">
-                     <span className="text-[10px] text-black/20 font-mono tracking-widest">QUERY_ENGINE_v4.2 // RUNNING</span>
+                     <span className="text-[10px] text-black/20 font-mono tracking-widest">风险引擎 v4.2 // 运行中</span>
                   </div>
 
                   <div className="flex items-center gap-4 lg:gap-6">
@@ -288,7 +285,7 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-center relative z-10">
               <div className="flex items-center gap-8 mb-8 lg:mb-12 opacity-60">
                 <div className="w-12 lg:w-16 h-[1px] bg-gradient-to-r from-gold to-transparent" />
-                <span className="text-[10px] tracking-[0.4em] lg:tracking-[0.8em] uppercase font-bold text-black/60">Standard of Protection</span>
+                <span className="text-[10px] tracking-[0.4em] lg:tracking-[0.8em] font-bold text-black/60">守护的标准</span>
               </div>
               
               <h1 className="hero-headline mb-12 lg:mb-16 text-4xl sm:text-5xl lg:text-7xl">
@@ -309,11 +306,11 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
                     </div>
                     <div>
                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-[10px] text-trust-blue tracking-widest uppercase font-bold bg-blue-50 px-3 py-1 rounded-full">Active</span>
-                          <span className="text-[9px] text-black/20 font-mono">NODE_AX_88</span>
+                          <span className="text-[10px] text-trust-blue tracking-widest font-bold bg-blue-50 px-3 py-1 rounded-full">在线</span>
+                          <span className="text-[9px] text-black/20 font-mono">节点 AX_88</span>
                        </div>
                        <h3 className="text-xl font-serif text-black mb-1">陈先生</h3>
-                       <p className="text-[10px] text-black/40 tracking-[0.3em] uppercase font-mono">Senior Risk Architect</p>
+                       <p className="text-[10px] text-black/40 tracking-[0.3em]">高级风险架构师</p>
                     </div>
                  </div>
               </motion.div>
@@ -331,9 +328,9 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
                    {/* Life-Stage Navigator */}
                    <div className="flex flex-wrap lg:flex-nowrap gap-6 lg:gap-20 border-b border-black/5 pb-8 lg:pb-10">
                       {[
-                        { id: 'Founders', label: '创业者', sub: 'Enterprise' }, 
-                        { id: 'Guardians', label: '守护者', sub: 'Heritage' }, 
-                        { id: 'Explorers', label: '探索者', sub: 'Horizon' }
+                        { id: 'Founders', label: '创业者', sub: '企业' },
+                        { id: 'Guardians', label: '守护者', sub: '传承' },
+                        { id: 'Explorers', label: '探索者', sub: '远行' }
                       ].map(item => (
                         <div 
                           key={item.id}
@@ -374,7 +371,7 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
                          </div>
                          
                          <button onClick={onStart} className="flex items-center justify-center gap-3 px-6 lg:px-10 py-4 lg:py-5 rounded-xl bg-gradient-to-r from-[#E63E31] to-[#C92A1D] text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all duration-500 group/btn hover:-translate-y-0.5 mt-4 md:mt-0">
-                            <span className="text-xs lg:text-sm tracking-[0.2em] font-medium uppercase whitespace-nowrap">Activate // 启动</span>
+                            <span className="text-xs lg:text-sm tracking-[0.2em] font-medium whitespace-nowrap">立即启动</span>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="flex-shrink-0 opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300"><path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="1.5"/></svg>
                          </button>
                       </div>
@@ -382,7 +379,7 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
                       {/* Suggestion Chips */}
                       <div className="flex gap-2 lg:gap-4 flex-wrap px-4">
                         {[
-                          "刚买了一辆特斯拉 Model 3",
+                          "刚买了一辆新能源车",
                           "给 60 岁的父母配置保险",
                           "我的创业公司需要资产保护"
                         ].map((suggestion, i) => (
@@ -418,8 +415,8 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
             />
           ))}
         </div>
-        <span className="text-[9px] tracking-[0.4em] text-black/30 uppercase">
-          {isSoundOn ? 'Soundscape On' : 'Nature Silence'}
+        <span className="text-[9px] tracking-[0.4em] text-black/30">
+          {isSoundOn ? '声景开启' : '静谧自然'}
         </span>
       </div>
 
@@ -445,7 +442,7 @@ const Pulse = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
              {/* Left Column: Data Installation */}
              <div className="col-span-12 lg:col-span-5 flex flex-col justify-center">
-                <span className="pulse-label whitespace-nowrap">Real-time Pulse / 02</span>
+                <span className="pulse-label whitespace-nowrap">实时脉动 / 02</span>
                 <h2 className="section-title text-black">
                    系统实时<span className="italic text-black/20 ml-2 lg:ml-6">核保脉动</span>
                 </h2>
@@ -455,9 +452,9 @@ const Pulse = () => {
 
                 <div className="space-y-10">
                    {[
-                      { label: 'NODE_STATUS', val: '99.98%', desc: '全网节点连通率', color: 'text-green-600' },
-                      { label: 'EXECUTION_LATENCY', val: '0.8s', desc: '平均理赔响应耗时', color: 'text-blue-600' },
-                      { label: 'THREAT_SHIELD', val: '24.5G+', desc: '实时防御资产估值', color: 'text-black' }
+                      { label: '节点状态', val: '99.98%', desc: '全网节点连通率', color: 'text-green-600' },
+                      { label: '理赔时延', val: '0.8秒', desc: '平均理赔响应耗时', color: 'text-blue-600' },
+                      { label: '防御资产', val: '245亿+', desc: '实时防御资产估值', color: 'text-black' }
                    ].map((item, i) => (
                       <div key={i} className="flex items-end gap-10 group cursor-pointer whitespace-nowrap">
                          <div className="flex flex-col">
@@ -486,11 +483,11 @@ const Pulse = () => {
                             <div className="w-10 h-10 rounded-full bg-trust-blue shadow-[0_0_20px_rgba(0,84,166,0.3)] flex items-center justify-center text-white">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                             </div>
-                            <span className="text-[10px] text-black/20 font-mono">PROTOCOL_01</span>
+                            <span className="text-[10px] text-black/20 font-mono">协议_01</span>
                          </div>
                          <div>
-                            <span className="text-4xl lg:text-5xl font-din text-black leading-none">¥500k</span>
-                            <p className="text-[11px] text-black/40 mt-4 tracking-widest uppercase font-mono whitespace-nowrap">Critical Illness Claim</p>
+                            <span className="text-4xl lg:text-5xl font-din text-black leading-none">¥50万</span>
+                            <p className="text-[11px] text-black/40 mt-4 tracking-widest whitespace-nowrap">重疾理赔</p>
                          </div>
                       </div>
 
@@ -499,11 +496,11 @@ const Pulse = () => {
                             <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             </div>
-                            <span className="text-[10px] text-white/40 font-mono">AVG_TIME</span>
+                            <span className="text-[10px] text-white/40 font-mono">平均时效</span>
                          </div>
                          <div>
-                            <span className="text-4xl lg:text-5xl font-din leading-none">0.8s</span>
-                            <p className="text-[11px] text-white/40 mt-4 tracking-widest uppercase font-mono whitespace-nowrap">Global Payout Velocity</p>
+                            <span className="text-4xl lg:text-5xl font-din leading-none">0.8秒</span>
+                            <p className="text-[11px] text-white/40 mt-4 tracking-widest whitespace-nowrap">全球赔付速度</p>
                          </div>
                       </div>
 
@@ -514,7 +511,7 @@ const Pulse = () => {
                                <div className="h-10 w-[2px] bg-trust-blue" />
                                <div>
                                   <h4 className="text-lg lg:text-xl font-serif text-black">全域理赔链路已激活</h4>
-                                  <p className="text-[10px] lg:text-[11px] text-black/30 font-mono uppercase tracking-widest mt-1">Status: Active // Node: AX-88</p>
+                                  <p className="text-[10px] lg:text-[11px] text-black/30 font-mono tracking-widest mt-1">状态：运行中 // 节点：AX-88</p>
                                </div>
                             </div>
                             <div className="flex -space-x-3">
@@ -531,10 +528,10 @@ const Pulse = () => {
                          
                          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-black/5">
                             {[
-                               { label: 'Verifying', city: 'Hong Kong' },
-                               { label: 'Clearing', city: 'London' },
-                               { label: 'Settling', city: 'Singapore' },
-                               { label: 'Complete', city: 'Tokyo' }
+                               { label: '核验中', city: '香港' },
+                               { label: '清算中', city: '伦敦' },
+                               { label: '结算中', city: '新加坡' },
+                               { label: '已完成', city: '东京' }
                             ].map((log, idx) => (
                                <div key={idx} className="flex flex-col gap-1 whitespace-nowrap">
                                   <span className="text-[9px] text-black/20 font-mono uppercase tracking-[0.2em]">{log.label}</span>
@@ -555,7 +552,7 @@ const Pulse = () => {
   )
 }
 
-const Product = () => {
+const Product = ({ onStart }: { onStart: () => void }) => {
   return (
     <section id="product" className="relative min-h-screen bg-white flex items-center justify-center py-24 lg:py-32 overflow-hidden">
        {/* Background decorative elements */}
@@ -564,10 +561,10 @@ const Product = () => {
        <div className="container z-10 w-full">
           <div className="mb-20 lg:mb-40">
              <div className="flex flex-col items-center text-center">
-                <span className="pulse-label">System Architecture / 04</span>
+                <span className="pulse-label">系统架构 / 04</span>
                 <h2 className="section-title text-black">
                    生命建筑系统<br />
-                   <span className="text-black/10 italic text-4xl md:text-[6rem]">Architecture HUD</span>
+                   <span className="text-black/10 italic text-4xl md:text-[6rem]">架构总览</span>
                 </h2>
              </div>
           </div>
@@ -603,21 +600,21 @@ const Product = () => {
                    <div className="flex gap-4 lg:gap-6 items-center">
                       <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-trust-blue animate-pulse" />
                       <div className="flex flex-col">
-                        <span className="text-[10px] lg:text-[12px] font-mono text-trust-blue uppercase tracking-[0.4em] font-bold">Blueprint_View_4.0</span>
-                        <span className="text-[8px] lg:text-[9px] font-mono text-black/20 uppercase tracking-widest mt-1">Ref_System_Integrity_Verified</span>
+                        <span className="text-[10px] lg:text-[12px] font-mono text-trust-blue tracking-[0.4em] font-bold">蓝图视图_4.0</span>
+                        <span className="text-[8px] lg:text-[9px] font-mono text-black/20 tracking-widest mt-1">系统完整性_已验证</span>
                       </div>
                    </div>
                 </div>
                 <div className="absolute top-8 right-8 lg:top-16 lg:right-16 text-right hidden md:block">
                    <h3 className="text-3xl lg:text-4xl font-serif text-black mb-2">稳固架构</h3>
-                   <p className="text-[10px] lg:text-[12px] text-black/40 uppercase tracking-[0.6em] font-mono">Solid Structure Protocol</p>
+                   <p className="text-[10px] lg:text-[12px] text-black/40 tracking-[0.6em]">稳固架构协议</p>
                 </div>
 
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pointer-events-auto w-full mt-auto relative z-40 mb-6 lg:mb-12">
                    {[
-                      { title: 'Foundation', cn: '生命地基', desc: '覆盖全球 240+ 医疗资源网络，确保资产底层稳健。' },
-                      { title: 'Pillars', cn: '保障支柱', desc: '千万级保额提供强力金融支撑，抵御无法预见的风险。' },
-                      { title: 'Roof', cn: '财富屋顶', desc: '通过跨代传承协议与税务筹划，构建永久资产掩体。' }
+                      { title: '地基', cn: '生命地基', desc: '覆盖全球 240+ 医疗资源网络，确保资产底层稳健。' },
+                      { title: '支柱', cn: '保障支柱', desc: '千万级保额提供强力金融支撑，抵御无法预见的风险。' },
+                      { title: '屋顶', cn: '财富屋顶', desc: '通过跨代传承协议与税务筹划，构建永久资产掩体。' }
                    ].map((item, i) => (
                       <div key={i} className="group/item cursor-pointer bg-white/95 backdrop-blur-2xl p-8 lg:p-10 rounded-[2.5rem] border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:-translate-y-3 transition-all duration-700">
                          <div className="w-10 h-[3px] bg-trust-blue mb-6 lg:mb-8 group-hover/item:w-16 transition-all duration-700" />
@@ -632,15 +629,15 @@ const Product = () => {
                    <div className="flex gap-16 lg:gap-24 w-full lg:w-auto justify-between lg:justify-start">
                       <div className="flex flex-col">
                          <span className="text-4xl lg:text-5xl font-din text-black leading-none mb-3">99.9%</span>
-                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em] uppercase font-mono">Safety Rating</span>
+                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em]">安全评级</span>
                       </div>
                       <div className="flex flex-col">
                          <span className="text-4xl lg:text-5xl font-din text-black leading-none mb-3">AAA</span>
-                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em] uppercase font-mono">Credit Level</span>
+                         <span className="text-[10px] lg:text-[12px] text-black/30 tracking-[0.4em]">信用等级</span>
                       </div>
                    </div>
-                   <button className="cta-vermilion w-full md:w-auto text-center py-7 px-16">
-                      Download Blueprint Kit
+                   <button onClick={onStart} className="cta-vermilion w-full md:w-auto text-center py-7 px-16">
+                      开始我的诊断
                    </button>
                 </div>
              </div>
@@ -648,8 +645,8 @@ const Product = () => {
 
           <div className="mt-20 text-center flex flex-col items-center gap-6">
              <div className="w-1 h-20 bg-gradient-to-b from-blue-600/20 to-transparent" />
-             <span className="text-[10px] lg:text-[12px] text-black/40 tracking-[0.6em] uppercase font-mono mb-4">
-                STRUCTURAL_INTEGRITY_VERIFIED
+             <span className="text-[10px] lg:text-[12px] text-black/40 tracking-[0.6em] mb-4">
+                结构完整性_已验证
              </span>
           </div>
        </div>
@@ -669,7 +666,7 @@ const Ecosystem = () => {
        <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 mb-20 lg:mb-32">
              <div className="col-span-12 lg:col-span-6">
-                <span className="pulse-label">Service Infrastructure / 05</span>
+                <span className="pulse-label">服务基础设施 / 05</span>
                 <h2 className="section-title text-black mb-0">
                    全域<span className="italic text-black/20 ml-6">守护矩阵</span>
                 </h2>
@@ -684,22 +681,22 @@ const Ecosystem = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16">
              {[
                 { 
-                  title: 'AI 风险雷达', 
-                  en: 'AI Risk Radar', 
+                  title: 'AI 风险雷达',
+                  en: '风险预警',
                   desc: '集成 140 个风险维度的实时监测，在危害发生的前置 24 小时发出避险指令。',
                   icon: <div className="radar-scanner"><div className="radar-line" /></div>
                 },
                 { 
-                  title: '全球医疗节点', 
-                  en: 'Global Medical Node', 
+                  title: '全球医疗节点',
+                  en: '医疗直连',
                   desc: '直连梅奥、约翰霍普金斯等全球顶尖医疗机构，确保在黄金时间内获取救治方案。',
                   icon: <div className="w-24 h-24 rounded-full bg-trust-blue/5 border border-trust-blue/10 flex items-center justify-center text-trust-blue">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                   </div>
                 },
                 { 
-                  title: '智能理赔中枢', 
-                  en: 'Claims Execution Hub', 
+                  title: '智能理赔中枢',
+                  en: '极速理赔',
                   desc: '基于自研“朱砂”加密协议，实现全自动化的证据链闭环，确保理赔即刻到账。',
                   icon: <div className="w-24 h-24 rounded-full bg-black flex items-center justify-center text-white shadow-2xl">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -737,7 +734,7 @@ const Manifesto = () => {
             transition={{ duration: 2 }}
             className="space-y-8 lg:space-y-12"
           >
-              <p className="text-gold text-[10px] lg:text-sm tracking-[0.8em] lg:tracking-[1.2em] uppercase font-bold mb-8">The Philosophy of Defense</p>
+              <p className="text-gold text-[10px] lg:text-sm tracking-[0.8em] lg:tracking-[1.2em] font-bold mb-8">防御的哲学</p>
               <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif max-w-6xl mx-auto leading-tight italic text-black font-medium">
                 “我们定义<b>尊严</b>。<br />
                 保险不仅是支付手段，更是生命系统的<b>防御协奏</b>。”
@@ -749,7 +746,7 @@ const Manifesto = () => {
           </motion.div>
        </div>
        <div className="absolute bottom-0 w-full select-none pointer-events-none opacity-[0.05]">
-          <h2 className="outline-text text-center tracking-tighter text-black text-[clamp(4rem,15vw,20rem)]">UNCOMPROMISED</h2>
+          <h2 className="outline-text text-center tracking-tighter text-black text-[clamp(4rem,15vw,20rem)]">毫不妥协</h2>
        </div>
     </section>
   )
@@ -773,37 +770,37 @@ const Footer = () => {
                 <div className="pt-4 lg:pt-8 flex gap-4 lg:gap-6 grayscale opacity-20 hover:opacity-100 transition-opacity">
                    {/* Abstract partner logo symbols */}
                    {[1,2,3,4].map(i => (
-                     <div key={i} className="w-10 h-10 lg:w-12 lg:h-12 border border-black/10 rounded flex items-center justify-center font-mono text-[8px] text-black">NODE_{i}</div>
+                     <div key={i} className="w-10 h-10 lg:w-12 lg:h-12 border border-black/10 rounded flex items-center justify-center font-mono text-[8px] text-black">节点_{i}</div>
                    ))}
                 </div>
              </div>
 
              <div className="grid grid-cols-2 gap-8 col-span-1 lg:col-span-4 lg:col-start-6">
                <div className="space-y-8 lg:space-y-10">
-                  <span className="text-gold text-[10px] tracking-[0.4em] uppercase opacity-40">Categories</span>
+                  <span className="text-gold text-[10px] tracking-[0.4em] opacity-40">保障类目</span>
                   <div className="flex flex-col gap-4 lg:gap-5 text-[14px]">
-                     {['Health_架构', 'Life_责任', 'Wealth_传承', 'Travel_流动'].map(link => (
-                       <a key={link} href="#" className="text-black/40 hover:text-black transition-colors lowercase tracking-widest">{link}</a>
+                     {['健康架构', '责任人生', '财富传承', '全球流动'].map(link => (
+                       <a key={link} href="#" className="text-black/40 hover:text-black transition-colors tracking-widest">{link}</a>
                      ))}
                   </div>
                </div>
 
                <div className="space-y-8 lg:space-y-10">
-                  <span className="text-gold text-[10px] tracking-[0.4em] uppercase opacity-40">Intelligence</span>
+                  <span className="text-gold text-[10px] tracking-[0.4em] opacity-40">智识中枢</span>
                   <div className="flex flex-col gap-4 lg:gap-5 text-[14px]">
                      {['AI风控协议', '朱砂理赔标准', '全球共保网', '技术白皮书'].map(link => (
-                       <a key={link} href="#" className="text-black/40 hover:text-black transition-colors lowercase tracking-widest">{link}</a>
+                       <a key={link} href="#" className="text-black/40 hover:text-black transition-colors tracking-widest">{link}</a>
                      ))}
                   </div>
                </div>
              </div>
 
              <div className="col-span-1 md:col-span-2 lg:col-span-4 space-y-8 lg:space-y-10">
-                <span className="text-gold text-[10px] tracking-[0.4em] uppercase opacity-40">System_Status</span>
+                <span className="text-gold text-[10px] tracking-[0.4em] opacity-40">系统状态</span>
                 <div className="p-6 lg:p-8 rounded-xl bg-black/[0.02] border border-black/5 space-y-6">
                    <div className="flex justify-between items-center text-[10px] lg:text-[11px] font-mono">
-                      <span className="text-black/40 uppercase">Global Node Connectivity</span>
-                      <span className="text-green-600">99.98% AVAILABLE</span>
+                      <span className="text-black/40">全球节点连通性</span>
+                      <span className="text-green-600">99.98% 可用</span>
                    </div>
                    <div className="w-full h-1 bg-black/5 rounded-full overflow-hidden">
                       <motion.div 
@@ -822,18 +819,18 @@ const Footer = () => {
 
           <div className="pt-12 lg:pt-24 border-t border-black/5 flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12 text-center lg:text-left">
              <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
-                <span className="text-[9px] text-black/20 tracking-[0.4em] lg:tracking-[0.8em] uppercase">Built for Serenity / 2026</span>
+                <span className="text-[9px] text-black/20 tracking-[0.4em] lg:tracking-[0.8em]">为安宁而建 / 2026</span>
                 <div className="hidden lg:block w-12 h-px bg-black/10" />
-                <span className="text-[9px] text-black/20 tracking-[0.4em] lg:tracking-[0.8em] uppercase italic font-serif">Deep Slate Edition</span>
+                <span className="text-[9px] text-black/20 tracking-[0.4em] lg:tracking-[0.8em] italic font-serif">深岩版</span>
              </div>
              
              <p className="text-[9px] lg:text-[10px] text-black/20 tracking-[0.1em] lg:tracking-[0.2em] font-light">
-                © 2026 BAOXIAN GLOBAL. 所有权归属于数字生命建筑研究所.
+                © 2026 保险环球. 所有权归属于数字生命建筑研究所.
              </p>
 
              <div className="flex gap-8 lg:gap-10">
-                {['WeChat', 'LinkedIn', 'Terminal'].map(social => (
-                  <span key={social} className="text-[9px] lg:text-[10px] text-black/20 hover:text-gold cursor-pointer transition-colors tracking-widest uppercase">{social}</span>
+                {['微信', '领英', '终端'].map(social => (
+                  <span key={social} className="text-[9px] lg:text-[10px] text-black/20 hover:text-gold cursor-pointer transition-colors tracking-widest">{social}</span>
                 ))}
              </div>
           </div>
@@ -879,7 +876,7 @@ export default function App() {
 
           <Hero activeStage={activeStage} setActiveStage={setActiveStage} onStart={() => setView('dialogue')} />
           <Pulse />
-          <Product />
+          <Product onStart={() => setView('dialogue')} />
           <Ecosystem />
           <Manifesto />
           <Footer />

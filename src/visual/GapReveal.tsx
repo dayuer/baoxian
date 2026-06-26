@@ -26,7 +26,7 @@ export default function GapReveal({ gap }: { gap: number }) {
         transition={{ duration: 1.5 }}
         className="text-xs tracking-[0.4em] uppercase opacity-40"
       >
-        你的家庭保障缺口
+        如果那一天来了
       </motion.div>
       <div className="text-4xl md:text-7xl font-light text-[#e05c4a] my-8 tabular-nums">
         {formatYuan(display)}
@@ -37,7 +37,7 @@ export default function GapReveal({ gap }: { gap: number }) {
         transition={{ delay: 2.6, duration: 1.5 }}
         className="opacity-60 max-w-md"
       >
-        这个数字，可能从来没有人帮你算过。
+        这是你的家人可能面对的缺口。之前，也许没有人帮你算过这笔账。
       </motion.p>
     </div>
   )
