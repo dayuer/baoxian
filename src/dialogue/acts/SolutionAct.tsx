@@ -8,13 +8,13 @@ function formatYuan(n: number): string {
   return '¥' + Math.round(n).toLocaleString('zh-CN')
 }
 
-export default function SolutionAct({ profile, next }: ActProps) {
+export default function SolutionAct({ profile, next, back }: ActProps) {
   const full = { ...EMPTY_PROFILE, ...profile } as FamilyProfile
   const r = calculateGap(full)
   const abroad = full.residencyAbroad
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-24">
+    <div className="max-w-2xl mx-auto px-6 pt-28 pb-24">
       <div className="text-xs tracking-[0.3em] uppercase opacity-40 mb-3">缺口怎么被盖住</div>
       <h2 className="text-2xl md:text-3xl font-light leading-snug mb-8">
         你不需要现在拿出 {formatYuan(r.gap)}。<br />
@@ -45,7 +45,13 @@ export default function SolutionAct({ profile, next }: ActProps) {
         </ul>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex justify-end mt-10">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex items-center justify-between mt-10">
+        <button
+          onClick={back}
+          className="text-xs tracking-[0.2em] uppercase text-white/30 hover:text-white/70 transition-colors"
+        >
+          ← 上一步
+        </button>
         <button onClick={next} className="px-8 py-3 rounded-full bg-white text-black">
           带走属于我的报告
         </button>

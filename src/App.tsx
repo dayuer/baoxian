@@ -67,7 +67,7 @@ const VariableLogo = () => {
   )
 }
 
-const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+const MegaMenu = ({ isOpen, onClose, onStart }: { isOpen: boolean, onClose: () => void, onStart: () => void }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -108,14 +108,14 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
                      { id: "Guardian", zh: "守护", desc: "家庭资产配置与跨代承袭" },
                      { id: "Explorer", zh: "探索", desc: "极端环境下的人身安全架构" }
                    ].map((item, i) => (
-                     <motion.a 
+                     <motion.button
                        key={i}
-                       href={`#${item.id}`}
+                       type="button"
                        initial={{ x: 50, opacity: 0 }}
                        animate={{ x: 0, opacity: 1 }}
                        transition={{ delay: 0.4 + i * 0.1 }}
-                       className="group relative flex items-center py-6 lg:py-10 border-b border-black/5 last:border-none overflow-hidden"
-                       onClick={onClose}
+                       className="group relative flex items-center py-6 lg:py-10 border-b border-black/5 last:border-none overflow-hidden w-full text-left"
+                       onClick={() => { onClose(); onStart() }}
                      >
                         <div className="flex flex-1 items-center justify-between z-10">
                            <div className="flex items-baseline gap-12 lg:gap-20">
@@ -134,7 +134,7 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
                               {item.desc}
                            </span>
                         </div>
-                     </motion.a>
+                     </motion.button>
                    ))}
                 </div>
 
@@ -151,7 +151,7 @@ const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
   )
 }
 
-const Header = () => {
+const Header = ({ onStart }: { onStart: () => void }) => {
   const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -172,14 +172,15 @@ const Header = () => {
             </div>
             
             <div className="pointer-events-auto flex items-center gap-6 lg:gap-12">
-               {/* Round 1: Global Support Service Node */}
-               <div className="hidden lg:flex items-center gap-3 px-5 py-2.5 bg-white/60 backdrop-blur-sm rounded-full border border-black/5 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
-                    <span className="text-[9px] text-blue-800 tracking-[0.2em] font-mono uppercase">Node_Active</span>
-                  </div>
-               </div>
-               
+               {/* 主入口：开始诊断 */}
+               <button
+                  onClick={onStart}
+                  className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/15 hover:bg-black hover:text-white transition-colors text-[11px] tracking-[0.2em] uppercase"
+               >
+                  开始诊断
+                  <span className="text-trust-blue group-hover:text-white">→</span>
+               </button>
+
                <div className="flex items-center gap-3">
                   <div className="sos-button" />
                   <span className="text-[9px] text-black tracking-[0.4em] uppercase hidden md:inline">Emergency SOS</span>
@@ -210,9 +211,10 @@ const Header = () => {
                       <VariableLogo />
                       <div className="h-4 lg:h-6 w-px bg-black/10" />
                       <div className="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-mono text-black">
-                         <a href="#hero" className="hover:text-trust-blue transition-colors">Curated</a>
                          <a href="#pulse" className="hover:text-trust-blue transition-colors">Analysis</a>
                          <a href="#product" className="hover:text-trust-blue transition-colors">Integrity</a>
+                         <a href="#ecosystem" className="hover:text-trust-blue transition-colors">Network</a>
+                         <button onClick={onStart} className="text-trust-blue hover:underline uppercase tracking-[0.2em]">诊断 →</button>
                       </div>
                    </div>
 
@@ -237,7 +239,7 @@ const Header = () => {
         </div>
       </header>
 
-      <MegaMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <MegaMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} onStart={onStart} />
     </>
   )
 }
@@ -361,10 +363,11 @@ const Hero = ({ activeStage, setActiveStage, onStart }: { activeStage: string, s
                       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-0 group/input relative mt-2 bg-white rounded-2xl p-2 shadow-sm border border-black/5 transition-all hover:shadow-md hover:border-black/10">
                          <div className="flex-1 px-4 lg:px-6 py-4 flex items-center gap-4">
                             <span className="text-trust-blue text-xl font-light">/</span>
-                            <input 
-                              type="text" 
+                            <input
+                              type="text"
                               value={inputValue}
                               onChange={(e) => setInputValue(e.target.value)}
+                              onKeyDown={(e) => e.key === 'Enter' && onStart()}
                               placeholder={activePlaceholder}
                               className="w-full bg-transparent border-none outline-none text-lg lg:text-xl font-light placeholder:text-black/20 text-black"
                             />
@@ -726,7 +729,7 @@ const Ecosystem = () => {
 
 const Manifesto = () => {
   return (
-    <section className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden py-24 lg:py-40">
+    <section id="manifesto" className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden py-24 lg:py-40">
        <div className="container text-center z-10">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -851,20 +854,37 @@ export default function App() {
     return p ? decodeProfile(p) ?? undefined : undefined
   })()
 
-  if (view === 'dialogue') {
-    return <DialogueFlow initialProfile={initialProfile} />
-  }
-
   return (
-    <div className="bg-[#F7F8FA] selection:bg-gold selection:text-black">
-      <Header />
+    <AnimatePresence mode="wait">
+      {view === 'dialogue' ? (
+        <motion.div
+          key="dialogue"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <DialogueFlow initialProfile={initialProfile} onExit={() => setView('brand')} />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="brand"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-[#F7F8FA] selection:bg-gold selection:text-black"
+        >
+          <Header onStart={() => setView('dialogue')} />
 
-      <Hero activeStage={activeStage} setActiveStage={setActiveStage} onStart={() => setView('dialogue')} />
-      <Pulse />
-      <Product />
-      <Ecosystem />
-      <Manifesto />
-      <Footer />
-    </div>
+          <Hero activeStage={activeStage} setActiveStage={setActiveStage} onStart={() => setView('dialogue')} />
+          <Pulse />
+          <Product />
+          <Ecosystem />
+          <Manifesto />
+          <Footer />
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }

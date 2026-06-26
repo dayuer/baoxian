@@ -5,7 +5,7 @@ import { EMPTY_PROFILE } from '../types'
 import type { ActProps } from '../DialogueFlow'
 import type { FamilyProfile } from '../../engine/types'
 
-export default function TakeawayAct({ profile }: ActProps) {
+export default function TakeawayAct({ profile, back }: ActProps) {
   const full = { ...EMPTY_PROFILE, ...profile } as FamilyProfile
   const [copied, setCopied] = useState(false)
 
@@ -22,7 +22,7 @@ export default function TakeawayAct({ profile }: ActProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-20">
+    <div className="max-w-2xl mx-auto px-6 pt-28 pb-20">
       <Report profile={full} />
 
       <div className="flex flex-wrap gap-4 justify-center mt-10">
@@ -40,6 +40,15 @@ export default function TakeawayAct({ profile }: ActProps) {
       <p className="text-center opacity-40 text-sm mt-16 leading-relaxed">
         什么时候你准备好往下走，我都在这儿。<br />不催你。
       </p>
+
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={back}
+          className="text-xs tracking-[0.2em] uppercase text-white/30 hover:text-white/70 transition-colors"
+        >
+          ← 回去看方案
+        </button>
+      </div>
     </div>
   )
 }
