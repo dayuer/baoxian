@@ -6,6 +6,7 @@ import OpeningAct from './acts/OpeningAct'
 import FamilyAct from './acts/FamilyAct'
 import CalcAct from './acts/CalcAct'
 import RevealAct from './acts/RevealAct'
+import SolutionAct from './acts/SolutionAct'
 
 interface ActProps {
   profile: Partial<FamilyProfile>
@@ -20,7 +21,7 @@ const ACT_REGISTRY: Record<ActId, (p: ActProps) => ReactNode> = {
   family: (p) => <FamilyAct {...p} />,
   calc: (p) => <CalcAct {...p} />,
   reveal: (p) => <RevealAct {...p} />,
-  solution: ({ next }) => <button onClick={next}>solution →</button>,
+  solution: (p) => <SolutionAct {...p} />,
   takeaway: () => <div>takeaway</div>,
 }
 
